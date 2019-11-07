@@ -1,21 +1,38 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace MonoGameProjekt
 {
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Game1 : Game
+    public class GameWorld : Game
     {
+
+        int screenWidth;
+        int screenHeight;
+
+        Texture2D maleSprite;
+
+        private List<GameObject> gameObjects = new List<GameObject>();
+
+        public static Vector2 screenSize;
+
+
+
+
+
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        public Game1()
+        public GameWorld()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
         }
 
         /// <summary>
@@ -26,7 +43,11 @@ namespace MonoGameProjekt
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            graphics.PreferredBackBufferWidth = 1000;
+            graphics.PreferredBackBufferHeight = 1000;
+            graphics.IsFullScreen = false;
+            graphics.ApplyChanges();
+            Window.Title = "MonogameProject";
 
             base.Initialize();
         }
@@ -39,6 +60,8 @@ namespace MonoGameProjekt
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            maleSprite = Content.Load<Texture2D>("player_fwd");
 
             // TODO: use this.Content to load your game content here
         }
@@ -76,8 +99,17 @@ namespace MonoGameProjekt
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-
+            spriteBatch.Begin();
+            DrawPlayer();
+            spriteBatch.End();
             base.Draw(gameTime);
+        }
+
+        private void DrawPlayer()
+        {
+
+            spriteBatch.Draw(maleSprite, new Vector2(1, 2), Color.White);
+
         }
     }
 }
