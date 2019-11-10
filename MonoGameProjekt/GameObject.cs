@@ -21,11 +21,16 @@ namespace MonoGameProjekt
 
         protected Texture2D sprite;
 
+        protected Vector2 origin;
+
         public abstract void LoadContent(ContentManager content);
 
         public abstract void Update(GameTime gameTime);
 
-
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(sprite, position, null, Color.White, 0, origin, 1, SpriteEffects.None, 0);
+        }
 
     }
 }

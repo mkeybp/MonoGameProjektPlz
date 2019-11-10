@@ -32,7 +32,11 @@ namespace Monogame_Projekt
                 sprites[i] = content.Load<Texture2D>("enemy" + (i + 1));
             }
             sprite = sprites[0];
+            Respawn();
 
+            this.origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
+
+            this.position = new Vector2(GameWorld.ScreenSize.X / 2, GameWorld.ScreenSize.Y - (sprite.Height / 2));
         }
 
         private void Move(GameTime gameTime)

@@ -20,7 +20,18 @@ namespace MonoGameProjekt
 
         public static Vector2 screenSize;
 
+        public static Vector2 ScreenSize
+        {
+            get
+            {
+                return screenSize;
+            }
 
+            set
+            {
+                screenSize = value;
+            }
+        }
 
 
 
@@ -31,6 +42,9 @@ namespace MonoGameProjekt
         public GameWorld()
         {
             graphics = new GraphicsDeviceManager(this);
+
+            screenSize = new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
+
             Content.RootDirectory = "Content";
 
         }
