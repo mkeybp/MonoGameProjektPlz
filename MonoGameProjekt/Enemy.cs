@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGameProjekt;
 
 namespace Monogame_Projekt
 {
@@ -24,6 +25,13 @@ namespace Monogame_Projekt
 
         public override void LoadContent(ContentManager content)
         {
+            sprites = new Texture2D[4];
+
+            for (int i = 0; i < sprites.Length; i++)
+            {
+                sprites[i] = content.Load<Texture2D>("enemy" + (i + 1));
+            }
+            sprite = sprites[0];
 
         }
 
