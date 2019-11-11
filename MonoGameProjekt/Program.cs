@@ -14,7 +14,7 @@ namespace MonoGameProjekt
         [STAThread]
         static void Main()
         {
-            using (var game = new GameWold())
+            using (var game = new GameWorld())
                 game.Run();
         }
     }

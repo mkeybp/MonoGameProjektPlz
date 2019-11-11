@@ -11,120 +11,51 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MonoGameProjekt
 {
-    class Player : GameObject
+    public class Player
     {
-        //protected List<int> weapons = new List<int>;
-        public int playerHealth;
-        public int score;
-        public float speed;
 
-        public Player()
-        {
-            speed = 500f;
-        }
-        /// <summary>
-        /// Loader spiller sprites.
-        /// </summary>
-        /// <param name="content"></param>
-        public override void LoadContent(ContentManager content)
-        {
-            sprites = new Texture2D[4];
+        private float rotation;
 
-        }
-        /// <summary>
-        /// Tjekker for inputs hver frame.
-        /// </summary>
-        /// <param name="gameTime"></param>
-        public override void Update(GameTime gameTime)
-        {
-            HandleInput();
-            Move(gameTime);
-            HandleScore();
-            SelectWeapon();
-            CameraFollow();
-        }
-        /// <summary>
-        /// Score.
-        /// </summary>
-        private void HandleScore()
-        {
+        public Vector2 position;
 
-        }
-        /// <summary>
-        /// Bevæger spilleren når man trykker på de givne taster.
-        /// </summary>
-        private void HandleInput()
-        {
-            velocity = Vector2.Zero;
+        public Texture2D playerTexture;
+        private Vector2 direction;
 
-            KeyboardState keyState = Keyboard.GetState();
-
-            if (keyState.IsKeyDown(Keys.W))
-            {
-                velocity += new Vector2(0, -1);
-            }
-            if (keyState.IsKeyDown(Keys.A))
-            {
-                velocity += new Vector2(-1, 0);
-            }
-            if (keyState.IsKeyDown(Keys.S))
-            {
-                velocity += new Vector2(0, 1);
-            }
-            if (keyState.IsKeyDown(Keys.D))
-            {
-                velocity += new Vector2(1, 0);
-            }
-            if (velocity != Vector2.Zero)
-            {
-                velocity.Normalize();
-            }
-        }
         /// <summary>
-        /// Gør at man går samme hastighed ligegyldigt at fps.
+        /// The point we rotate on
         /// </summary>
-        /// <param name="gameTime"></param>
-        protected void Move(GameTime gameTime)
-        {
-            float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+        public Vector2 origin;
 
-            position += ((velocity * speed) * deltaTime);
-        }
         /// <summary>
-        /// Gør at kameraet følger spilleren.
+        /// The speed of the rotation
         /// </summary>
-        private void CameraFollow()
+        public float RotationVelocity = 3f;
+
+        /// <summary>
+        /// The speed of moving forward
+        /// </summary>
+        public float LinearVelocity = 4f;
+
+        public Player(Texture2D texture)
         {
+            playerTexture = texture;
+        }
+
+        public void Update()
+        {
+            if (Keyboard.GetState().IsKeyDown(Keys.A))
+                rotation -= MathHelper.ToRadians(RotationVelocity);
+            else if (Keyboard.GetState().IsKeyDown(Keys.D))
+                rotation += MathHelper.ToRadians(RotationVelocity);
+            direction = new Vector2((float)Math.Cos(MathHelper.ToRadians(90) - rotation), -(float)Math.Sin(MathHelper.ToRadians(90) - rotation));
+            if (Keyboard.GetState().IsKeyDown(Keys.W))
+                position += direction * LinearVelocity;
 
         }
-        /// <summary>
-        /// Lader dig skifte våben
-        /// </summary>
-        private void SelectWeapon()
-        {
 
-        }
-        /// <summary>
-        /// Lader dig gå ud fra siden af mappet og komme ind på den anden side.
-        /// </summary>
-        /*private void ScreenWarp()
+        public void Draw(SpriteBatch spriteBatch)
         {
-            if (position.X > GameWorld.ScreenSize.X + sprite.Width)
-            {
-                position.X = -sprite.Width;
-            }
-            else if (position.X < -sprite.Width)
-            {
-                position.X = GameWorld.ScreenSize.X + sprite.Width;
-            }
-            if (position.Y > GameWorld.ScreenSize.Y + sprite.Height)
-            {
-                position.Y = -sprite.Height;
-            }
-            else if (position.Y < -sprite.Height)
-            {
-                position.Y = GameWorld.ScreenSize.Y + sprite.Height;
-            }
-        }*/
+            spriteBatch.Draw(playerTexture, position, null, Color.White, rotation, origin, 1, SpriteEffects.None, 0f);
+        }
     }
 }
