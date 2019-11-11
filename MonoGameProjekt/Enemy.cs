@@ -25,7 +25,7 @@ namespace Monogame_Projekt
 
         public override void LoadContent(ContentManager content)
         {
-            sprites = new Texture2D[1];
+            sprites = new Texture2D[1]; 
 
             for (int i = 0; i < sprites.Length; i++)
             {
