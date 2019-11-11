@@ -29,12 +29,12 @@ namespace MonoGameProjekt
         /// <summary>
         /// The speed of the rotation
         /// </summary>
-        public float RotationVelocity = 3f;
+        public float rotationVelocity = 3f;
 
         /// <summary>
         /// The speed of moving forward
         /// </summary>
-        public float LinearVelocity = 4f;
+        public float linearVelocity = 4f;
 
         public Player(Texture2D texture)
         {
@@ -44,13 +44,14 @@ namespace MonoGameProjekt
         public void Update()
         {
             if (Keyboard.GetState().IsKeyDown(Keys.A))
-                rotation -= MathHelper.ToRadians(RotationVelocity);
+                rotation -= MathHelper.ToRadians(rotationVelocity);
             else if (Keyboard.GetState().IsKeyDown(Keys.D))
-                rotation += MathHelper.ToRadians(RotationVelocity);
+                rotation += MathHelper.ToRadians(rotationVelocity);
             direction = new Vector2((float)Math.Cos(MathHelper.ToRadians(90) - rotation), -(float)Math.Sin(MathHelper.ToRadians(90) - rotation));
             if (Keyboard.GetState().IsKeyDown(Keys.W))
-                position += direction * LinearVelocity;
-
+                position += direction * linearVelocity;
+            if (Keyboard.GetState().IsKeyDown(Keys.S))
+                position -= direction * linearVelocity;
         }
 
         public void Draw(SpriteBatch spriteBatch)
