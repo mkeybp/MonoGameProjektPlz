@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Monogame_Projekt;
 using System.Collections.Generic;
 
 namespace MonoGameProjekt
@@ -16,8 +17,7 @@ namespace MonoGameProjekt
 
         Texture2D maleSprite;
 
-        private List<GameObject> gameObjects = new List<GameObject>();
-
+        private List<GameObject> gameObjects;
         public static Vector2 screenSize;
 
         public static Vector2 ScreenSize
@@ -63,6 +63,9 @@ namespace MonoGameProjekt
             graphics.ApplyChanges();
             Window.Title = "MonogameProject";
 
+            gameObjects = new List<GameObject>();
+            gameObjects.Add(new Enemy());
+
             base.Initialize();
         }
 
@@ -76,6 +79,11 @@ namespace MonoGameProjekt
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             maleSprite = Content.Load<Texture2D>("player_fwd");
+
+            foreach (GameObject go in gameObjects)
+            {
+                go.LoadContent(Content);
+            }
 
             // TODO: use this.Content to load your game content here
         }
@@ -99,7 +107,10 @@ namespace MonoGameProjekt
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            foreach (GameObject go in gameObjects)
+            {
+                go.Update(gameTime);
+            }
 
             base.Update(gameTime);
         }
@@ -124,6 +135,10 @@ namespace MonoGameProjekt
 
             spriteBatch.Draw(maleSprite, new Vector2(1, 2), Color.White);
 
+            foreach (GameObject go in gameObjects)
+            {
+                go.Draw(spriteBatch);
+            }
         }
     }
 }
