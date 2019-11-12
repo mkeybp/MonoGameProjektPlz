@@ -81,10 +81,13 @@ namespace MonoGameProjekt
             Move(gameTime);
             HandleScore();
             SelectWeapon();
-            Animate(gameTime);
             ScreenWarp();
             CameraFollow(gameTime);
             playerPosition = this.position;
+            if (Keyboard.GetState().IsKeyDown(Keys.W))
+            {
+                Animate(gameTime);
+            }
         }
         /// <summary>
         /// Score.
