@@ -40,6 +40,8 @@ namespace MonoGameProjekt
         public Player()
         {
             speed = 500f;
+            playerHealth = 100;
+
         }
         /// <summary>
         /// Loader spiller sprites.
@@ -47,26 +49,28 @@ namespace MonoGameProjekt
         /// <param name="content"></param>
         public override void LoadContent(ContentManager content)
         {
-            sprites = new Texture2D[1];
+
+            sprites = new Texture2D[6];
 
             for (int i = 0; i < sprites.Length; i++)
             {
-                sprites[i] = content.Load<Texture2D>("player_fwd");
+                sprites[i] = content.Load<Texture2D>(i + 1 + "Player");
             }
-            sprite = sprites[0];
+            fps = 5;
+            sprite = sprites[1];
 
             this.origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
 
             this.position = new Vector2(GameWorld.ScreenSize.X / 2, GameWorld.ScreenSize.Y - (sprite.Height / 2));
 
         }
-        /*private void Animate()
-        {
-            while()
-            {
+        /* private void Animate()
+         {
+             while(Keyboard.GetState().IsKeyDown(Keys.W))
+             {
 
-            }
-        }*/
+             }
+         }*/
         /// <summary>
         /// Tjekker for inputs hver frame.
         /// </summary>
@@ -77,7 +81,9 @@ namespace MonoGameProjekt
             Move(gameTime);
             HandleScore();
             SelectWeapon();
-            CameraFollow();
+            Animate(gameTime);
+            ScreenWarp();
+            CameraFollow(gameTime);
             playerPosition = this.position;
         }
         /// <summary>
@@ -115,9 +121,9 @@ namespace MonoGameProjekt
         /// <summary>
         /// Gør at kameraet følger spilleren.
         /// </summary>
-        private void CameraFollow()
+        public void CameraFollow(GameTime gameTime)
         {
-
+            position = new Vector2(position.X, position.Y);
         }
         /// <summary>
         /// Lader dig skifte våben
@@ -129,7 +135,7 @@ namespace MonoGameProjekt
         /// <summary>
         /// Lader dig gå ud fra siden af mappet og komme ind på den anden side.
         /// </summary>
-        /*private void ScreenWarp()
+        private void ScreenWarp()
         {
             if (position.X > GameWorld.ScreenSize.X + sprite.Width)
             {
@@ -147,6 +153,6 @@ namespace MonoGameProjekt
             {
                 position.Y = GameWorld.ScreenSize.Y + sprite.Height;
             }
-        }*/
+        }
     }
 }
