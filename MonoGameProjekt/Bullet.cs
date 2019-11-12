@@ -9,21 +9,31 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MonoGameProjekt
 {
-    class Bullet
+
+    class Bullet : GameObject
     {
-        private Vector2 position;
         private Vector2 direction;
-        private int speed = 100;
-        private int radius = 15;
-        bool projectileFlying = false;
+        private const float bulletSpeed = 200;
 
-
-        private void UpdateProjectile()
+        public Bullet(Vector2 direction, Vector2 startPosition, ContentManager content) : base(startPosition,content, "bullet")
         {
-            if (projectileFlying)
-            {
+            this.direction = direction;
+            this.direction.Normalize();
+        }
 
+        /// <summary>
+        /// Moves the Bullet in the designated direction. If it goes outside the screen area it gets removed
+        /// </summary>
+        /// <param name="gameTime">The elasped time since last update call</param>
+        public override void Update(GameTime gameTime)
+        {
+            position += direction * (float)(bulletSpeed * gameTime.ElapsedGameTime.TotalSeconds);
+            if (!GameWorld.ScreenSize.Intersects(CollisionBox))
+            {
+                GameWorld.RemoveGameObject(this);
             }
         }
+
+        
     }
 }

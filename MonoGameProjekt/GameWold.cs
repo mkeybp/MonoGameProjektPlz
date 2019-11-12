@@ -52,6 +52,7 @@ namespace MonoGameProjekt
             base.Initialize();
         }
 
+
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
         /// all of your content.
@@ -88,6 +89,11 @@ namespace MonoGameProjekt
             // TODO: Add your update logic here
 
             base.Update(gameTime);
+        }
+
+        public static void RemoveGameObject(GameObject go)
+        {
+            toBeRemoved.Add(go);
         }
 
         /// <summary>
