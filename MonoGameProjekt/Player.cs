@@ -148,7 +148,7 @@ namespace MonoGameProjekt
             {
                 position.X = GameWorld.ScreenSize.X + sprite.Width;
             }
-            if (position.Y > GameWorld.ScreenSize.Y + sprite.Height)
+            if (position.Y > GameWorld.ScreenSize.Y * 2 + sprite.Height)
             {
                 position.Y = -sprite.Height;
             }
