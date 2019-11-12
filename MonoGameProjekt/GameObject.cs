@@ -41,18 +41,18 @@ namespace MonoGameProjekt
         }
         protected void Animate(GameTime gameTime)
         {
-            //Adds time that has passed since last update
+            //Tid siden sidste update.
             timeElapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            //Calculates the curent index
+            //Udregner current index
             currentIndex = (int)(timeElapsed * fps);
 
             sprite = sprites[currentIndex];
 
-            //Checks if we need to restart the animation
+            //Checker om den skal resette animation.
             if (currentIndex >= sprites.Length - 1)
             {
-                //Resets the animation
+                //Ressetter animationen.
                 timeElapsed = 0;
                 currentIndex = 0;
             }
