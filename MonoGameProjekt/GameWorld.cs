@@ -15,7 +15,6 @@ namespace MonoGameProjekt
         int screenWidth;
         int screenHeight;
 
-        Texture2D maleSprite;
 
         private List<GameObject> gameObjects;
         public static Vector2 screenSize;
@@ -64,6 +63,7 @@ namespace MonoGameProjekt
             Window.Title = "MonogameProject";
 
             gameObjects = new List<GameObject>();
+            gameObjects.Add(new Player());
             gameObjects.Add(new Enemy());
 
             base.Initialize();
@@ -77,8 +77,6 @@ namespace MonoGameProjekt
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            maleSprite = Content.Load<Texture2D>("player_fwd");
 
             foreach (GameObject go in gameObjects)
             {
@@ -125,20 +123,14 @@ namespace MonoGameProjekt
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
-            DrawPlayer();
+
+            foreach (GameObject gameObject in gameObjects)
+            {
+                gameObject.Draw(spriteBatch);
+            }
+
             spriteBatch.End();
             base.Draw(gameTime);
-        }
-
-        private void DrawPlayer()
-        {
-
-            spriteBatch.Draw(maleSprite, new Vector2(1, 2), Color.White);
-
-            foreach (GameObject go in gameObjects)
-            {
-                go.Draw(spriteBatch);
-            }
         }
     }
 }

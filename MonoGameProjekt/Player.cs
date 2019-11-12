@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,9 +13,29 @@ namespace MonoGameProjekt
     class Player : GameObject
     {
         //protected List<int> weapons = new List<int>;
+
+        
+        private Vector2 direction;
+        public float rotationVelocity = 3f;
+        public float linearVelocity = 4f;
+
         public int playerHealth;
         public int score;
         public float speed;
+
+        private static Vector2 playerPosition;
+
+        public static Vector2 PlayerPosition
+        {   
+            get
+            {
+                return playerPosition;
+            }
+            set
+            {
+                playerPosition = value;
+            }
+        }
 
         public Player()
         {
@@ -28,7 +47,17 @@ namespace MonoGameProjekt
         /// <param name="content"></param>
         public override void LoadContent(ContentManager content)
         {
-            sprites = new Texture2D[4];
+            sprites = new Texture2D[1];
+
+            for (int i = 0; i < sprites.Length; i++)
+            {
+                sprites[i] = content.Load<Texture2D>("player_fwd");
+            }
+            sprite = sprites[0];
+
+            this.origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
+
+            this.position = new Vector2(GameWorld.ScreenSize.X / 2, GameWorld.ScreenSize.Y - (sprite.Height / 2));
 
         }
         /// <summary>
@@ -42,6 +71,7 @@ namespace MonoGameProjekt
             HandleScore();
             SelectWeapon();
             CameraFollow();
+            playerPosition = this.position;
         }
         /// <summary>
         /// Score.
@@ -55,30 +85,15 @@ namespace MonoGameProjekt
         /// </summary>
         private void HandleInput()
         {
-            velocity = Vector2.Zero;
-
-            KeyboardState keyState = Keyboard.GetState();
-
-            if (keyState.IsKeyDown(Keys.W))
-            {
-                velocity += new Vector2(0, -1);
-            }
-            if (keyState.IsKeyDown(Keys.A))
-            {
-                velocity += new Vector2(-1, 0);
-            }
-            if (keyState.IsKeyDown(Keys.S))
-            {
-                velocity += new Vector2(0, 1);
-            }
-            if (keyState.IsKeyDown(Keys.D))
-            {
-                velocity += new Vector2(1, 0);
-            }
-            if (velocity != Vector2.Zero)
-            {
-                velocity.Normalize();
-            }
+            if (Keyboard.GetState().IsKeyDown(Keys.A))
+                rotation -= MathHelper.ToRadians(rotationVelocity);
+            else if (Keyboard.GetState().IsKeyDown(Keys.D))
+                rotation += MathHelper.ToRadians(rotationVelocity);
+            direction = new Vector2((float)Math.Cos(MathHelper.ToRadians(90) - rotation), -(float)Math.Sin(MathHelper.ToRadians(90) - rotation));
+            if (Keyboard.GetState().IsKeyDown(Keys.W))
+                position += direction * linearVelocity;
+            if (Keyboard.GetState().IsKeyDown(Keys.S))
+                position -= direction * linearVelocity;
         }
         /// <summary>
         /// Gør at man går samme hastighed ligegyldigt at fps.

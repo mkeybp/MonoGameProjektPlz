@@ -16,7 +16,8 @@ namespace Monogame_Projekt
         private Random random;
         protected int health;
 
-
+        private Vector2 distance;
+        private Vector2 direction;
 
         public override void Update(GameTime gameTime)
         {
@@ -36,21 +37,32 @@ namespace Monogame_Projekt
 
             this.origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
 
-            this.position = new Vector2(GameWorld.ScreenSize.X / 2, GameWorld.ScreenSize.Y - (sprite.Height / 2));
+            this.position = new Vector2(GameWorld.ScreenSize.X / 2 + 200, GameWorld.ScreenSize.Y - (sprite.Height / 2));
+
         }
 
         private void Move(GameTime gameTime)
         {
+            //velocity = new Vector2(- Player.PlayerPosition.X, - Player.PlayerPosition.Y);
 
-            float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            distance.X = Player.PlayerPosition.X - position.X;
+            distance.Y = Player.PlayerPosition.Y - position.Y;
 
-            position += ((velocity * speed) * deltaTime);
+            rotation = (float)Math.Atan2( distance.X, -distance.Y);
+            
+
+            direction = new Vector2((float)Math.Cos(MathHelper.ToRadians(90) - rotation), -(float)Math.Sin(MathHelper.ToRadians(90) - rotation));
+            position += direction * 2;
+
+
         }
+
+
 
         private void Respawn()
         {
-            //velocity = todo: add player position
-            speed = 100f;
+            velocity = new Vector2(rotation);
+            speed = 10f;
             //position = new Vector2(random.Next(0,1000),random.Next(0,1000));
         }
 
