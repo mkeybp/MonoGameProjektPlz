@@ -14,7 +14,7 @@ namespace MonoGameProjekt
     {
         //protected List<int> weapons = new List<int>;
 
-        
+
         private Vector2 direction;
         public float rotationVelocity = 3f;
         public float linearVelocity = 4f;
@@ -26,7 +26,7 @@ namespace MonoGameProjekt
         private static Vector2 playerPosition;
 
         public static Vector2 PlayerPosition
-        {   
+        {
             get
             {
                 return playerPosition;
@@ -59,6 +59,13 @@ namespace MonoGameProjekt
 
             this.position = new Vector2(GameWorld.ScreenSize.X / 2, GameWorld.ScreenSize.Y - (sprite.Height / 2));
 
+        }
+        private void Animate()
+        {
+            while()
+            {
+
+            }
         }
         /// <summary>
         /// Tjekker for inputs hver frame.
