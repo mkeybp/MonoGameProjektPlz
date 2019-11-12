@@ -26,7 +26,7 @@ namespace Monogame_Projekt
 
         public override void LoadContent(ContentManager content)
         {
-            sprites = new Texture2D[1];
+            sprites = new Texture2D[1]; 
 
             for (int i = 0; i < sprites.Length; i++)
             {
@@ -48,11 +48,19 @@ namespace Monogame_Projekt
             distance.X = Player.PlayerPosition.X - position.X;
             distance.Y = Player.PlayerPosition.Y - position.Y;
 
-            rotation = (float)Math.Atan2(distance.X, -distance.Y);
-
-
+            rotation = (float)Math.Atan2( distance.X, -distance.Y);
+            
             direction = new Vector2((float)Math.Cos(MathHelper.ToRadians(90) - rotation), -(float)Math.Sin(MathHelper.ToRadians(90) - rotation));
-            position += direction * 2;
+
+            float positiveDistanceX = distance.X;
+            float positiveDistanceY = distance.Y;
+            if (distance.X < 0)
+                positiveDistanceX *= -1;
+            if (distance.Y < 0)
+                positiveDistanceY *= -1;
+
+            if (positiveDistanceX > 50 || positiveDistanceY > 50)
+                position += direction * 2;
 
 
         }
