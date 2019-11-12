@@ -84,7 +84,7 @@ namespace MonoGameProjekt
             ScreenWarp();
             CameraFollow(gameTime);
             playerPosition = this.position;
-            if (Keyboard.GetState().IsKeyDown(Keys.W))
+            if (Keyboard.GetState().IsKeyDown(Keys.W) || Keyboard.GetState().IsKeyDown(Keys.S))
             {
                 Animate(gameTime);
             }
