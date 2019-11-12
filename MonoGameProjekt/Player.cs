@@ -60,13 +60,13 @@ namespace MonoGameProjekt
             this.position = new Vector2(GameWorld.ScreenSize.X / 2, GameWorld.ScreenSize.Y - (sprite.Height / 2));
 
         }
-        private void Animate()
+        /*private void Animate()
         {
             while()
             {
 
             }
-        }
+        }*/
         /// <summary>
         /// Tjekker for inputs hver frame.
         /// </summary>
