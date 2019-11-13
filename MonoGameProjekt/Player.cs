@@ -52,7 +52,7 @@ namespace MonoGameProjekt
             sprites = new Texture2D[5];
             for (int i = 0; i < sprites.Length; i++)
             {
-                sprites[i] = content.Load<Texture2D>(i + 1 + "Playernew");
+                sprites[i] = content.Load<Texture2D>(i + 1 + "playernew");
             }
             fps = 5;
             sprite = sprites[0];
