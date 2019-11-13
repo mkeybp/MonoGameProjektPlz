@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Monogame_Projekt;
 
 namespace MonoGameProjekt
 {
@@ -22,6 +23,8 @@ namespace MonoGameProjekt
         public int playerHealth;
         public int score;
         public float speed;
+
+        
 
         private static Vector2 playerPosition;
         public static Vector2 PlayerPosition
@@ -97,7 +100,7 @@ namespace MonoGameProjekt
             //Player shoot
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
-                
+                GameWorld.gameObjects.Add(Bullet();
             }
         }
         /// <summary>

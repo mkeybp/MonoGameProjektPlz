@@ -15,7 +15,8 @@ namespace MonoGameProjekt
         int screenWidth;
         int screenHeight;
 
-        List<GameObject> gameObjects = new List<GameObject>();
+        public static List<GameObject> gameObjects;
+        
 
 
         public static Vector2 screenSize;
@@ -52,7 +53,7 @@ namespace MonoGameProjekt
             graphics.IsFullScreen = false;
             graphics.ApplyChanges();
             Window.Title = "MonogameProject";
-            //gameObjects = new List<GameObject>();
+            gameObjects = new List<GameObject>();
             gameObjects.Add(new Player());
             gameObjects.Add(new Enemy());
             gameObjects.Add(new Bullet());

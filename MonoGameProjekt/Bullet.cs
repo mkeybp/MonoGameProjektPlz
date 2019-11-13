@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MonoGameProjekt
 {
-    class Bullet : GameObject
+    public class Bullet : GameObject
     {
         private Vector2 direction;
 

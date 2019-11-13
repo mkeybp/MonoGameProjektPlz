@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MonoGameProjekt
 {
-    abstract class GameObject
+    public abstract class GameObject
     {
         protected Vector2 velocity;
 
