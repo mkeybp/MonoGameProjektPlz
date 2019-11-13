@@ -49,10 +49,10 @@ namespace MonoGameProjekt
         /// <param name="content"></param>
         public override void LoadContent(ContentManager content)
         {
-            sprites = new Texture2D[6];
+            sprites = new Texture2D[5];
             for (int i = 0; i < sprites.Length; i++)
             {
-                sprites[i] = content.Load<Texture2D>(i + 1 + "Player");
+                sprites[i] = content.Load<Texture2D>(i + 1 + "Playernew");
             }
             fps = 5;
             sprite = sprites[1];
