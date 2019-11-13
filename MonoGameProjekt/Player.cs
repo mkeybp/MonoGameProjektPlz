@@ -19,7 +19,7 @@ namespace MonoGameProjekt
         public float rotationVelocity = 3f;
         public float linearVelocity = 4f;
 
-        //public override int playerHealth;
+        public int playerHealth;
         public int score;
         public float speed;
 
@@ -54,11 +54,12 @@ namespace MonoGameProjekt
             {
                 sprites[i] = content.Load<Texture2D>(i + 1 + "playernew");
             }
+                
             fps = 5;
             sprite = sprites[0];
             
             
-            //sprite = content.Load<Texture2D>("1playerweapon");
+            sprite = content.Load<Texture2D>("6playernew");
 
             this.origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
 
@@ -82,10 +83,16 @@ namespace MonoGameProjekt
             {
                 Animate(gameTime);
             }
+            /*if(Keyboard.GetState().IsKeyDown(Keys.Space))
+            {
+                //sprite = sprites(6playernew);
+            }*/
             else if (!Keyboard.GetState().IsKeyDown(Keys.W) || !Keyboard.GetState().IsKeyDown(Keys.S))
             {
                 sprite = sprites[0];
             }
+
+            
         }
         /// <summary>
         /// Score.
