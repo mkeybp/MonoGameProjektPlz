@@ -40,7 +40,7 @@ namespace MonoGameProjekt
         public Player()
         {
             speed = 500f;
-            playerHealth = 100;
+            //playerHealth = 100;
 
         }
         /// <summary>
