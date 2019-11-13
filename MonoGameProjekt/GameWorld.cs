@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Monogame_Projekt;
 using System.Collections.Generic;
 
 namespace MonoGameProjekt
@@ -14,13 +15,27 @@ namespace MonoGameProjekt
         int screenWidth;
         int screenHeight;
 
-        Texture2D maleSprite;
+        public SpriteFont font;
+        protected int score = 0;
+        protected int playerHealth = 0;
+        private Texture2D background;
 
-        private List<GameObject> gameObjects = new List<GameObject>();
 
+        private List<GameObject> gameObjects;
         public static Vector2 screenSize;
 
+        public static Vector2 ScreenSize
+        {
+            get
+            {
+                return screenSize;
+            }
 
+            set
+            {
+                screenSize = value;
+            }
+        }
 
 
 
@@ -31,6 +46,9 @@ namespace MonoGameProjekt
         public GameWorld()
         {
             graphics = new GraphicsDeviceManager(this);
+
+            screenSize = new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
+
             Content.RootDirectory = "Content";
 
         }
@@ -45,9 +63,15 @@ namespace MonoGameProjekt
         {
             graphics.PreferredBackBufferWidth = 1000;
             graphics.PreferredBackBufferHeight = 1000;
+            screenSize.Y = 1000;
+            screenSize.X = 1000;
             graphics.IsFullScreen = false;
             graphics.ApplyChanges();
             Window.Title = "MonogameProject";
+
+            gameObjects = new List<GameObject>();
+            gameObjects.Add(new Player());
+            gameObjects.Add(new Enemy());
 
             base.Initialize();
         }
@@ -60,8 +84,14 @@ namespace MonoGameProjekt
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            font = Content.Load<SpriteFont>("PlayerHealth");
+            font = Content.Load<SpriteFont>("Score");
+            background = Content.Load<Texture2D>("grass_backgroundnew");
 
-            maleSprite = Content.Load<Texture2D>("player_fwd");
+            foreach (GameObject go in gameObjects)
+            {
+                go.LoadContent(Content);
+            }
 
             // TODO: use this.Content to load your game content here
         }
@@ -85,7 +115,10 @@ namespace MonoGameProjekt
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            foreach (GameObject go  in gameObjects)
+            {
+                go.Update(gameTime);
+            }
 
             base.Update(gameTime);
         }
@@ -99,17 +132,17 @@ namespace MonoGameProjekt
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            spriteBatch.Begin();
-            DrawPlayer();
+            spriteBatch.Begin(SpriteSortMode.FrontToBack);
+            spriteBatch.DrawString(font, "Player Health: " + playerHealth, new Vector2(0, 0), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+            spriteBatch.DrawString(font, "Score: " + score, new Vector2(0, 20), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+            spriteBatch.Draw(background, new Vector2(0, 0),null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+            
+            foreach (GameObject gameObject in gameObjects)
+            {
+                gameObject.Draw(spriteBatch);
+            }
             spriteBatch.End();
             base.Draw(gameTime);
-        }
-
-        private void DrawPlayer()
-        {
-
-            spriteBatch.Draw(maleSprite, new Vector2(1, 2), Color.White);
-
         }
     }
 }
