@@ -50,12 +50,13 @@ namespace MonoGameProjekt
         /// <param name="content"></param>
         public override void LoadContent(ContentManager content)
         {
-            sprites = new Texture2D[1];
+            sprites = new Texture2D[5];
 
             for (int i = 0; i < sprites.Length; i++)
             {
-                sprites[i] = content.Load<Texture2D>("player_fwd");
+                sprites[i] = content.Load<Texture2D>(i + 1 + "playernew");
             }
+            fps = 5;
             sprite = sprites[0];
 
             this.origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
@@ -68,9 +69,11 @@ namespace MonoGameProjekt
         /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
-            HandleInput();
+            HandleInput(gameTime);
             Move(gameTime);
             HandleScore();
+            ScreenWarp();
+
             SelectWeapon();
             CameraFollow();
             playerPosition = this.position;
@@ -86,7 +89,7 @@ namespace MonoGameProjekt
         /// <summary>
         /// Bevæger spilleren når man trykker på de givne taster.
         /// </summary>
-        private void HandleInput()
+        private void HandleInput(GameTime gameTime)
         {
             if (Keyboard.GetState().IsKeyDown(Keys.A))
                 rotation -= MathHelper.ToRadians(rotationVelocity);
@@ -97,6 +100,16 @@ namespace MonoGameProjekt
                 position += direction * linearVelocity;
             if (Keyboard.GetState().IsKeyDown(Keys.S))
                 position -= direction * linearVelocity;
+            //Handle Animation
+            if (Keyboard.GetState().IsKeyDown(Keys.W) || Keyboard.GetState().IsKeyDown(Keys.S))
+            {
+                Animate(gameTime);
+            }
+            else if (!Keyboard.GetState().IsKeyDown(Keys.W) || !Keyboard.GetState().IsKeyDown(Keys.S))
+            {
+                sprite = sprites[0];
+            }
+
             //Player shoot
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
@@ -130,7 +143,7 @@ namespace MonoGameProjekt
         /// <summary>
         /// Lader dig gå ud fra siden af mappet og komme ind på den anden side.
         /// </summary>
-        /*private void ScreenWarp()
+        private void ScreenWarp()
         {
             if (position.X > GameWorld.ScreenSize.X + sprite.Width)
             {
@@ -148,6 +161,6 @@ namespace MonoGameProjekt
             {
                 position.Y = GameWorld.ScreenSize.Y + sprite.Height;
             }
-        }*/
+        }
     }
 }
