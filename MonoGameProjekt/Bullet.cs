@@ -24,8 +24,7 @@ namespace MonoGameProjekt
             
 
             this.origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
-            this.position = new Vector2(500, 500);
-            //this.position = new Vector2(Player.PlayerPosition.X, Player.PlayerPosition.Y);
+            this.position = new Vector2(Player.PlayerPosition.X, Player.PlayerPosition.Y);
             this.rotation = Player.PlayerRotation;
         }
         
