@@ -63,6 +63,8 @@ namespace MonoGameProjekt
         {
             graphics.PreferredBackBufferWidth = 1000;
             graphics.PreferredBackBufferHeight = 1000;
+            screenSize.Y = 1000;
+            screenSize.X = 1000;
             graphics.IsFullScreen = false;
             graphics.ApplyChanges();
             Window.Title = "MonogameProject";
