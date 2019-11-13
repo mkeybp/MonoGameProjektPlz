@@ -19,7 +19,7 @@ namespace MonoGameProjekt
         public float rotationVelocity = 3f;
         public float linearVelocity = 4f;
 
-        public int playerHealth;
+        //public override int playerHealth;
         public int score;
         public float speed;
 

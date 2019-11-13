@@ -15,9 +15,9 @@ namespace Monogame_Projekt
     {
         private Random random;
         protected int health;
-
         private Vector2 distance;
         private Vector2 direction;
+        public int score;
 
         public override void Update(GameTime gameTime)
         {
@@ -71,6 +71,8 @@ namespace Monogame_Projekt
         {
             velocity = new Vector2(rotation);
             speed = 10f;
+            score = +1;
+            
             //position = new Vector2(random.Next(0,1000),random.Next(0,1000));
         }
 

@@ -17,12 +17,8 @@ namespace MonoGameProjekt
 
         public SpriteFont font;
         protected int score = 0;
-        protected int playerHealth = 100;
+        protected int playerHealth = 0;
         private Texture2D background;
-
-        float backgroundScaling;
-
-
 
 
         private List<GameObject> gameObjects;
@@ -67,7 +63,7 @@ namespace MonoGameProjekt
         {
             graphics.PreferredBackBufferWidth = 1000;
             graphics.PreferredBackBufferHeight = 1000;
-            graphics.IsFullScreen = false;
+            graphics.IsFullScreen = true;
             graphics.ApplyChanges();
             Window.Title = "MonogameProject";
 
@@ -86,8 +82,8 @@ namespace MonoGameProjekt
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            font = Content.Load<SpriteFont>("Score");
             font = Content.Load<SpriteFont>("PlayerHealth");
+            font = Content.Load<SpriteFont>("Score");
             background = Content.Load<Texture2D>("grass_backgroundnew");
 
             foreach (GameObject go in gameObjects)
@@ -137,7 +133,7 @@ namespace MonoGameProjekt
             spriteBatch.Begin();
             spriteBatch.DrawString(font, "Player Health: " + playerHealth, new Vector2(0, 0), Color.White);
             spriteBatch.DrawString(font, "Score: " + score, new Vector2(0, 20), Color.White);
-            spriteBatch.Draw(background, new Vector2(0, 0), Color.White);
+            //spriteBatch.Draw(background, new Vector2(0, 0), Color.White);
             
             foreach (GameObject gameObject in gameObjects)
             {
