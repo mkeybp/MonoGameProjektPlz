@@ -138,7 +138,10 @@ namespace MonoGameProjekt
         }
         public void Shoot()
         {
+            if(Keyboard.GetState().IsKeyDown(Keys.Space))
+            {
 
+            }
         }
         /// <summary>
         /// Lader dig gå ud fra siden af mappet og komme ind på den anden side.
