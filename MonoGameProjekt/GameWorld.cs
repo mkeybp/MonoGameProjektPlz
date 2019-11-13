@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Monogame_Projekt;
@@ -29,6 +30,7 @@ namespace MonoGameProjekt
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        static ContentManager ContentInstance;
 
         public GameWorld()
         {
@@ -37,11 +39,13 @@ namespace MonoGameProjekt
             screenSize = new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
 
             Content.RootDirectory = "Content";
+            ContentInstance = Content;
 
         }
 
         public static void Instanciate(GameObject gameObject)
         {
+            gameObject.LoadContent(ContentInstance);
             newObjects.Add(gameObject);
         }
 
