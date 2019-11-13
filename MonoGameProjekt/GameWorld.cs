@@ -15,8 +15,9 @@ namespace MonoGameProjekt
         SpriteBatch spriteBatch;
         GraphicsDevice device;
 
-        public static Vector2 Camera { get; set; } = new Vector2(0, 0);
+       
         Texture2D backgroundTexture;
+        static Texture2D collisionTex;
 
         int screenWidth;
 
@@ -26,6 +27,9 @@ namespace MonoGameProjekt
         private List<GameObject> gameObjects;
         public static Vector2 screenSize;
 
+
+        public static Vector2 Camera { get; set; } = new Vector2(0, 0);
+        public static Texture2D CollisionTex { get => collisionTex; }
         public static Vector2 ScreenSize
         {
             get
@@ -90,7 +94,8 @@ namespace MonoGameProjekt
             {
                 go.LoadContent(Content);
             }
-            backgroundTexture = Content.Load<Texture2D>("lllll");
+            backgroundTexture = Content.Load<Texture2D>("grass");
+            collisionTex = Content.Load<Texture2D>("CollisionTex");
             screenWidth = device.PresentationParameters.BackBufferWidth;
             screenHeight = device.PresentationParameters.BackBufferHeight;
             // TODO: use this.Content to load your game content here
@@ -138,12 +143,19 @@ namespace MonoGameProjekt
             {
 
                 gameObject.Draw(spriteBatch);
+                gameObject.DrawCollisionBox(spriteBatch, collisionTex);
             }
             
+
             spriteBatch.End();
             base.Draw(gameTime);
-
             }
+
+
+
+        private void DrawCollisionBoxes()
+        {
+        }
 
         private void DrawScenery()
         {

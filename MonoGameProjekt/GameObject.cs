@@ -122,6 +122,10 @@ namespace MonoGameProjekt
         {
 
             SetCollisionRects();
+            spriteBatch.Draw(collisionTex, top, null, Color.Black);
+            spriteBatch.Draw(collisionTex, bottom, null, Color.Black);
+            spriteBatch.Draw(collisionTex, right, null, Color.Black);
+            spriteBatch.Draw(collisionTex, left, null, Color.Black);
 
         }
 
