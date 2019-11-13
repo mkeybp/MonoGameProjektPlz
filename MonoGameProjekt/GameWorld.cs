@@ -68,10 +68,10 @@ namespace MonoGameProjekt
             graphics.IsFullScreen = false;
             graphics.ApplyChanges();
             Window.Title = "MonogameProject";
-
             gameObjects = new List<GameObject>();
             gameObjects.Add(new Player());
             gameObjects.Add(new Enemy());
+            gameObjects.Add(new Bullet());
 
             base.Initialize();
         }
@@ -121,6 +121,9 @@ namespace MonoGameProjekt
             }
 
             base.Update(gameTime);
+
+            
+
         }
 
         /// <summary>
@@ -144,5 +147,7 @@ namespace MonoGameProjekt
             spriteBatch.End();
             base.Draw(gameTime);
         }
+
+        
     }
 }

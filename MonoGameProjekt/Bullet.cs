@@ -13,8 +13,6 @@ namespace MonoGameProjekt
     {
         private Vector2 direction;
 
-        public static Bullet Clone { get; internal set; }
-
         public override void LoadContent(ContentManager content)
         {
 

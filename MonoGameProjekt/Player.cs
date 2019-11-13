@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Monogame_Projekt;
 
 namespace MonoGameProjekt
 {
@@ -23,18 +24,20 @@ namespace MonoGameProjekt
         public int score;
         public float speed;
 
-        private static Vector2 playerPosition;
+        
 
+        private static Vector2 playerPosition;
         public static Vector2 PlayerPosition
         {
-            get
-            {
-                return playerPosition;
-            }
-            set
-            {
-                playerPosition = value;
-            }
+            get { return playerPosition; }
+            set { playerPosition = value; }
+        }
+
+        private static float playerRotation;
+        public static float PlayerRotation
+        {
+            get { return playerRotation; }
+            set { playerRotation = value; }
         }
 
         public Player()
@@ -62,7 +65,6 @@ namespace MonoGameProjekt
             sprite = content.Load<Texture2D>("6playernew");
 
             this.origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
-
             this.position = new Vector2(GameWorld.ScreenSize.X / 2, GameWorld.ScreenSize.Y - (sprite.Height / 2));
 
         }
@@ -114,7 +116,12 @@ namespace MonoGameProjekt
             if (Keyboard.GetState().IsKeyDown(Keys.W))
                 position += direction * linearVelocity;
             if (Keyboard.GetState().IsKeyDown(Keys.S))
-                position -= direction * linearVelocity / 2;
+                position -= direction * linearVelocity;
+            //Player shoot
+            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            {
+                GameWorld.gameObjects.Add(Bullet();
+            }
         }
         /// <summary>
         /// Gør at man går samme hastighed ligegyldigt at fps.
