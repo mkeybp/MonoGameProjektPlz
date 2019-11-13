@@ -31,6 +31,9 @@ namespace MonoGameProjekt
 
         protected int fps;
 
+
+
+
         public abstract void LoadContent(ContentManager content);
 
         public abstract void Update(GameTime gameTime);
