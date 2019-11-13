@@ -16,8 +16,8 @@ namespace MonoGameProjekt
         int screenHeight;
 
         public SpriteFont font;
-        public int score = 0;
-        public int playerHealth = 100;
+        protected int score = 0;
+        protected int playerHealth = 100;
 
 
         private List<GameObject> gameObjects;
