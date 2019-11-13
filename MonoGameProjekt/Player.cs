@@ -139,6 +139,7 @@ namespace MonoGameProjekt
         private void SelectWeapon()
         {
 
+
         }
         /// <summary>
         /// Lader dig gå ud fra siden af mappet og komme ind på den anden side.
