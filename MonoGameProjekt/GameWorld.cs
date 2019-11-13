@@ -63,7 +63,7 @@ namespace MonoGameProjekt
         {
             graphics.PreferredBackBufferWidth = 1000;
             graphics.PreferredBackBufferHeight = 1000;
-            graphics.IsFullScreen = true;
+            graphics.IsFullScreen = false;
             graphics.ApplyChanges();
             Window.Title = "MonogameProject";
 
@@ -130,10 +130,10 @@ namespace MonoGameProjekt
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            spriteBatch.Begin();
-            spriteBatch.DrawString(font, "Player Health: " + playerHealth, new Vector2(0, 0), Color.White);
-            spriteBatch.DrawString(font, "Score: " + score, new Vector2(0, 20), Color.White);
-            //spriteBatch.Draw(background, new Vector2(0, 0), Color.White);
+            spriteBatch.Begin(SpriteSortMode.FrontToBack);
+            spriteBatch.DrawString(font, "Player Health: " + playerHealth, new Vector2(0, 0), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+            spriteBatch.DrawString(font, "Score: " + score, new Vector2(0, 20), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+            spriteBatch.Draw(background, new Vector2(0, 0),null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
             
             foreach (GameObject gameObject in gameObjects)
             {
