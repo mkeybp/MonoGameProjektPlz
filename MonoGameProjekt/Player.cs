@@ -24,17 +24,17 @@ namespace MonoGameProjekt
         public float speed;
 
         private static Vector2 playerPosition;
-
         public static Vector2 PlayerPosition
-        {   
-            get
-            {
-                return playerPosition;
-            }
-            set
-            {
-                playerPosition = value;
-            }
+        {
+            get { return playerPosition; }
+            set { playerPosition = value; }
+        }
+
+        private static float playerRotation;
+        public static float PlayerRotation
+        {
+            get { return playerRotation; }
+            set { playerRotation = value; }
         }
 
         public Player()
@@ -56,7 +56,6 @@ namespace MonoGameProjekt
             sprite = sprites[0];
 
             this.origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
-
             this.position = new Vector2(GameWorld.ScreenSize.X / 2, GameWorld.ScreenSize.Y - (sprite.Height / 2));
 
         }
@@ -72,6 +71,7 @@ namespace MonoGameProjekt
             SelectWeapon();
             CameraFollow();
             playerPosition = this.position;
+            playerRotation = this.rotation;
         }
         /// <summary>
         /// Score.
@@ -94,6 +94,11 @@ namespace MonoGameProjekt
                 position += direction * linearVelocity;
             if (Keyboard.GetState().IsKeyDown(Keys.S))
                 position -= direction * linearVelocity;
+            //Player shoot
+            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            {
+                
+            }
         }
         /// <summary>
         /// Gør at man går samme hastighed ligegyldigt at fps.

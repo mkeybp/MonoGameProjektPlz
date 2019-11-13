@@ -16,6 +16,7 @@ namespace Monogame_Projekt
         private Random random;
         protected int health;
 
+
         private Vector2 distance;
         private Vector2 direction;
 
@@ -26,24 +27,18 @@ namespace Monogame_Projekt
 
         public override void LoadContent(ContentManager content)
         {
-            sprites = new Texture2D[1]; 
-
-            for (int i = 0; i < sprites.Length; i++)
-            {
-                sprites[i] = content.Load<Texture2D>("enemy" + (i + 1));
-            }
+            sprites = new Texture2D[] {
+                content.Load<Texture2D>("enemy1") };
             sprite = sprites[0];
-            Respawn();
 
             this.origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
-
             this.position = new Vector2(GameWorld.ScreenSize.X / 2 + 200, GameWorld.ScreenSize.Y - (sprite.Height / 2));
 
+            Respawn();
         }
 
         private void Move(GameTime gameTime)
         {
-            //velocity = new Vector2(- Player.PlayerPosition.X, - Player.PlayerPosition.Y);
 
             distance.X = Player.PlayerPosition.X - position.X;
             distance.Y = Player.PlayerPosition.Y - position.Y;
@@ -60,7 +55,7 @@ namespace Monogame_Projekt
                 positiveDistanceY *= -1;
 
             if (positiveDistanceX > 50 || positiveDistanceY > 50)
-                position += direction * 2;
+                position += direction * this.speed;
 
 
         }
@@ -69,8 +64,7 @@ namespace Monogame_Projekt
 
         private void Respawn()
         {
-            velocity = new Vector2(rotation);
-            speed = 10f;
+            this.speed = 2f;
             //position = new Vector2(random.Next(0,1000),random.Next(0,1000));
         }
 

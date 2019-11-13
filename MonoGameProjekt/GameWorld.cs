@@ -15,24 +15,15 @@ namespace MonoGameProjekt
         int screenWidth;
         int screenHeight;
 
+        List<GameObject> gameObjects = new List<GameObject>();
 
-        private List<GameObject> gameObjects;
+
         public static Vector2 screenSize;
-
         public static Vector2 ScreenSize
         {
-            get
-            {
-                return screenSize;
-            }
-
-            set
-            {
-                screenSize = value;
-            }
+            get { return screenSize; }
+            set { screenSize = value; }
         }
-
-
 
 
         GraphicsDeviceManager graphics;
@@ -61,10 +52,10 @@ namespace MonoGameProjekt
             graphics.IsFullScreen = false;
             graphics.ApplyChanges();
             Window.Title = "MonogameProject";
-
-            gameObjects = new List<GameObject>();
+            //gameObjects = new List<GameObject>();
             gameObjects.Add(new Player());
             gameObjects.Add(new Enemy());
+            gameObjects.Add(new Bullet());
 
             base.Initialize();
         }
@@ -111,6 +102,9 @@ namespace MonoGameProjekt
             }
 
             base.Update(gameTime);
+
+            
+
         }
 
         /// <summary>
@@ -132,5 +126,7 @@ namespace MonoGameProjekt
             spriteBatch.End();
             base.Draw(gameTime);
         }
+
+        
     }
 }
