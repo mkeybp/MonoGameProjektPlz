@@ -15,6 +15,10 @@ namespace MonoGameProjekt
         int screenWidth;
         int screenHeight;
 
+        public SpriteFont font;
+        public int score = 0;
+        public int playerHealth = 100;
+
 
         private List<GameObject> gameObjects;
         public static Vector2 screenSize;
@@ -77,6 +81,8 @@ namespace MonoGameProjekt
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            font = Content.Load<SpriteFont>("Score");
+            font = Content.Load<SpriteFont>("PlayerHealth");
             foreach (GameObject go in gameObjects)
             {
                 go.LoadContent(Content);
@@ -122,7 +128,8 @@ namespace MonoGameProjekt
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
-
+            spriteBatch.DrawString(font, "Player Health: " + playerHealth, new Vector2(0, 0), Color.White);
+            spriteBatch.DrawString(font, "Score: " + score, new Vector2(0, 18), Color.White);
             foreach (GameObject gameObject in gameObjects)
             {
                 gameObject.Draw(spriteBatch);
