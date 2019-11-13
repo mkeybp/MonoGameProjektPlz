@@ -49,28 +49,29 @@ namespace MonoGameProjekt
         /// <param name="content"></param>
         public override void LoadContent(ContentManager content)
         {
-            
             sprites = new Texture2D[6];
-
             for (int i = 0; i < sprites.Length; i++)
             {
-                sprites[i] = content.Load<Texture2D>(i+1+"Player");
+                sprites[i] = content.Load<Texture2D>(i + 1 + "Player");
             }
             fps = 5;
             sprite = sprites[1];
+            
+            
+            //sprite = content.Load<Texture2D>("1playerweapon");
 
             this.origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
 
             this.position = new Vector2(GameWorld.ScreenSize.X / 2, GameWorld.ScreenSize.Y - (sprite.Height / 2));
 
         }
-       /* private void Animate()
-        {
-            while(Keyboard.GetState().IsKeyDown(Keys.W))
-            {
+        /* private void Animate()
+         {
+             while(Keyboard.GetState().IsKeyDown(Keys.W))
+             {
 
-            }
-        }*/
+             }
+         }*/
         /// <summary>
         /// Tjekker for inputs hver frame.
         /// </summary>
@@ -135,6 +136,10 @@ namespace MonoGameProjekt
         {
 
         }
+        public void Shoot()
+        {
+
+        }
         /// <summary>
         /// Lader dig gå ud fra siden af mappet og komme ind på den anden side.
         /// </summary>
@@ -154,7 +159,7 @@ namespace MonoGameProjekt
             }
             else if (position.Y < -sprite.Height)
             {
-                position.Y = GameWorld.ScreenSize.Y + sprite.Height;
+                position.Y = GameWorld.ScreenSize.Y * 2 + sprite.Height;
             }
         }
     }
