@@ -55,7 +55,7 @@ namespace MonoGameProjekt
                 sprites[i] = content.Load<Texture2D>(i + 1 + "Playernew");
             }
             fps = 5;
-            sprite = sprites[1];
+            sprite = sprites[0];
             
             
             //sprite = content.Load<Texture2D>("1playerweapon");
@@ -88,6 +88,10 @@ namespace MonoGameProjekt
             if (Keyboard.GetState().IsKeyDown(Keys.W) || Keyboard.GetState().IsKeyDown(Keys.S))
             {
                 Animate(gameTime);
+            }
+            else if (!Keyboard.GetState().IsKeyDown(Keys.W) || !Keyboard.GetState().IsKeyDown(Keys.S))
+            {
+                sprite = sprites[0];
             }
         }
         /// <summary>
