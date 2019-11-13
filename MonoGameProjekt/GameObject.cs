@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,9 +52,13 @@ namespace MonoGameProjekt
 
         public int ScaleFactor { get => scaleFactor; set => scaleFactor = value; }
 
+
+        public GameObject(string spriteName, Vector2 pos)
+        {
+            position = pos;
+        }
         public abstract void LoadContent(ContentManager content);
 
-        public abstract void Update(GameTime gameTime);
 
         public virtual Rectangle CollisionBox
         {
@@ -64,10 +69,10 @@ namespace MonoGameProjekt
         }
 
 
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(sprite, position, null, Color.White, rotation, origin, 1, SpriteEffects.None, 0);
-        }
+        //public void Draw(SpriteBatch spriteBatch)
+        //{
+        //    spriteBatch.Draw(sprite, position, null, Color.White, rotation, origin, 1, SpriteEffects.None, 0);
+        //}
 
         public virtual int Width
         {
@@ -82,6 +87,42 @@ namespace MonoGameProjekt
             {
                 return CollisionBox.Height;
             }
+        }
+
+        public bool IsColliding(GameObject otherObj)
+        {
+            return CollisionBox.Intersects(otherObj.CollisionBox);
+        }
+
+        public virtual void DoCollision(GameObject otherObj)
+        {
+        }
+
+        public virtual void Update(GameTime gametime)
+        {
+        }
+
+        public virtual void Draw(SpriteBatch spriteBatch)
+        {
+            
+            spriteBatch.Draw(sprite, position - GameWorld.Camera, sprite.Bounds, rendercolor, 0f, new Vector2(0, 0), new Vector2(scaleFactor, scaleFactor), SpriteEffects.None, 0f);
+        }
+
+        protected virtual void SetCollisionRects()
+        {
+            Rectangle cBox = CollisionBox;
+            top = new Rectangle(cBox.X, cBox.Y, cBox.Width * (int)scaleFactor, 1);
+            bottom = new Rectangle(cBox.X, cBox.Y + cBox.Height * (int)scaleFactor, cBox.Width * (int)scaleFactor, 1);
+            right = new Rectangle(cBox.X + cBox.Width * (int)scaleFactor, cBox.Y, 1, cBox.Height * (int)scaleFactor);
+            left = new Rectangle(cBox.X, cBox.Y, 1, cBox.Height * (int)scaleFactor);
+
+        }
+
+        public virtual void DrawCollisionBox(SpriteBatch spriteBatch, Texture2D collisionTex)
+        {
+
+            SetCollisionRects();
+
         }
 
     }

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using System;
+using MonoGameProjekt;
+using Monogame_Projekt;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,7 +39,7 @@ namespace MonoGameProjekt
             }
         }
 
-        public Player()
+        public Player(string spriteName, Vector2 pos) : base(spriteName, pos)
         {
             speed = 500f;
         }

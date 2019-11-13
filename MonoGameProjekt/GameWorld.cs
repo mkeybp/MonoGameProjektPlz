@@ -11,8 +11,15 @@ namespace MonoGameProjekt
     /// </summary>
     public class GameWorld : Game
     {
+        GraphicsDeviceManager graphics;
+        SpriteBatch spriteBatch;
+        GraphicsDevice device;
+
+        public static Vector2 Camera { get; set; } = new Vector2(0, 0);
+        Texture2D backgroundTexture;
 
         int screenWidth;
+
         int screenHeight;
 
 
@@ -35,8 +42,6 @@ namespace MonoGameProjekt
 
 
 
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
 
         public GameWorld()
         {
@@ -63,8 +68,8 @@ namespace MonoGameProjekt
             Window.Title = "MonogameProject";
 
             gameObjects = new List<GameObject>();
-            gameObjects.Add(new Player());
-            gameObjects.Add(new Enemy());
+            gameObjects.Add(new Player("", Vector2.Zero));
+            gameObjects.Add(new Enemy("", Vector2.Zero));
 
             base.Initialize();
         }
@@ -77,12 +82,17 @@ namespace MonoGameProjekt
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            device = graphics.GraphicsDevice;
+
+
 
             foreach (GameObject go in gameObjects)
             {
                 go.LoadContent(Content);
             }
-
+            backgroundTexture = Content.Load<Texture2D>("lllll");
+            screenWidth = device.PresentationParameters.BackBufferWidth;
+            screenHeight = device.PresentationParameters.BackBufferHeight;
             // TODO: use this.Content to load your game content here
         }
 
@@ -123,14 +133,22 @@ namespace MonoGameProjekt
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
-
+            DrawScenery();
             foreach (GameObject gameObject in gameObjects)
             {
+
                 gameObject.Draw(spriteBatch);
             }
-
+            
             spriteBatch.End();
             base.Draw(gameTime);
+
+            }
+
+        private void DrawScenery()
+        {
+            Rectangle screenRectangle = new Rectangle(0, 0, screenWidth, screenHeight);
+            spriteBatch.Draw(backgroundTexture, screenRectangle, Color.White);
         }
     }
-}
+ }

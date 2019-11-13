@@ -19,6 +19,10 @@ namespace Monogame_Projekt
         private Vector2 distance;
         private Vector2 direction;
 
+        public Enemy(string spriteName, Vector2 pos) : base(spriteName, pos)
+        {
+        }
+
         public override void Update(GameTime gameTime)
         {
             Move(gameTime);
