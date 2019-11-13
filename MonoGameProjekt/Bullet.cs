@@ -13,12 +13,15 @@ namespace MonoGameProjekt
     {
         private Vector2 direction;
 
+
         public override void LoadContent(ContentManager content)
         {
 
-            sprites = new Texture2D[] {
-                content.Load<Texture2D>("Bullet") };
-            sprite = sprites[0];
+            //sprites = new Texture2D[] {
+            //    content.Load<Texture2D>("Bullet") };
+            //sprite = sprites[0];
+            sprite = content.Load<Texture2D>("Bullet");
+            
 
             this.origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
             this.position = new Vector2(500, 500);

@@ -100,7 +100,7 @@ namespace MonoGameProjekt
             //Player shoot
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
-                GameWorld.gameObjects.Add(Bullet();
+                GameWorld.Instanciate(new Bullet());
             }
         }
         /// <summary>

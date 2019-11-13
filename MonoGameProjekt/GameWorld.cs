@@ -16,7 +16,7 @@ namespace MonoGameProjekt
         int screenHeight;
 
         public static List<GameObject> gameObjects;
-        
+        public static List<GameObject> newObjects;
 
 
         public static Vector2 screenSize;
@@ -40,6 +40,11 @@ namespace MonoGameProjekt
 
         }
 
+        public static void Instanciate(GameObject gameObject)
+        {
+            newObjects.Add(gameObject);
+        }
+
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
         /// This is where it can query for any required services and load any non-graphic
@@ -53,11 +58,12 @@ namespace MonoGameProjekt
             graphics.IsFullScreen = false;
             graphics.ApplyChanges();
             Window.Title = "MonogameProject";
+
             gameObjects = new List<GameObject>();
+            newObjects = new List<GameObject>();
             gameObjects.Add(new Player());
             gameObjects.Add(new Enemy());
             gameObjects.Add(new Bullet());
-
             base.Initialize();
         }
 
@@ -101,6 +107,8 @@ namespace MonoGameProjekt
             {
                 go.Update(gameTime);
             }
+            gameObjects.AddRange(newObjects);
+            newObjects.Clear();
 
             base.Update(gameTime);
 
