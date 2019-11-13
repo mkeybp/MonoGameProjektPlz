@@ -110,7 +110,7 @@ namespace MonoGameProjekt
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            foreach (GameObject go in gameObjects)
+            foreach (GameObject go  in gameObjects)
             {
                 go.Update(gameTime);
             }
