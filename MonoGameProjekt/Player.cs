@@ -40,7 +40,7 @@ namespace MonoGameProjekt
             set { playerRotation = value; }
         }
 
-        public Player()
+        public Player(string spriteName, Vector2 pos) : base(spriteName, pos)
         {
             speed = 500f;
         }
@@ -113,7 +113,7 @@ namespace MonoGameProjekt
             //Player shoot
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
-                GameWorld.Instanciate(new Bullet());
+                GameWorld.Instanciate(new Bullet("", Vector2.Zero));
             }
         }
         /// <summary>

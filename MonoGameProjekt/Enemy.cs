@@ -19,7 +19,9 @@ namespace Monogame_Projekt
 
         private Vector2 distance;
         private Vector2 direction;
-
+        public Enemy(string spriteName, Vector2 pos) : base(spriteName, pos)
+        {
+        }
         public override void Update(GameTime gameTime)
         {
             Move(gameTime);
@@ -64,6 +66,8 @@ namespace Monogame_Projekt
 
         private void Respawn()
         {
+            velocity = new Vector2(rotation);
+
             this.speed = 2f;
             //position = new Vector2(random.Next(0,1000),random.Next(0,1000));
         }

@@ -13,7 +13,10 @@ namespace MonoGameProjekt
     {
         private Vector2 direction;
 
+        public Bullet(string spriteName, Vector2 pos) : base(spriteName, pos)
+        {
 
+        }
         public override void LoadContent(ContentManager content)
         {
 

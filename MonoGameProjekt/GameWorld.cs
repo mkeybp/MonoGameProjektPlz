@@ -19,6 +19,10 @@ namespace MonoGameProjekt
         public static List<GameObject> gameObjects;
         public static List<GameObject> newObjects;
 
+        Texture2D backgroundTexture;
+        static Texture2D collisionTex;
+        public static Vector2 Camera { get; set; } = new Vector2(0, 0);
+        public static Texture2D CollisionTex { get => collisionTex; }
 
         public static Vector2 screenSize;
         public static Vector2 ScreenSize
@@ -35,6 +39,7 @@ namespace MonoGameProjekt
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        GraphicsDevice device;
         static ContentManager ContentInstance;
 
         public GameWorld()
@@ -72,9 +77,9 @@ namespace MonoGameProjekt
 
             gameObjects = new List<GameObject>();
             newObjects = new List<GameObject>();
-            gameObjects.Add(new Player());
-            gameObjects.Add(new Enemy());
-            gameObjects.Add(new Bullet());
+            gameObjects.Add(new Player("", Vector2.Zero));
+            gameObjects.Add(new Enemy("", Vector2.Zero));
+            gameObjects.Add(new Bullet("", Vector2.Zero));
             base.Initialize();
         }
 
@@ -86,11 +91,18 @@ namespace MonoGameProjekt
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            device = graphics.GraphicsDevice;
 
             font = Content.Load<SpriteFont>("PlayerHealth");
             font = Content.Load<SpriteFont>("Score");
             background = Content.Load<Texture2D>("grass_backgroundnew");
-            
+
+            // Mikkel Bakground
+            //backgroundTexture = Content.Load<Texture2D>("grass");
+            collisionTex = Content.Load<Texture2D>("CollisionTex");
+            screenWidth = device.PresentationParameters.BackBufferWidth;
+            screenHeight = device.PresentationParameters.BackBufferHeight;
+
             foreach (GameObject go in gameObjects)
             {
                 go.LoadContent(Content);
@@ -141,6 +153,9 @@ namespace MonoGameProjekt
 
             // TODO: Add your drawing code here
             spriteBatch.Begin(SpriteSortMode.FrontToBack);
+            // Collision boxes
+            DrawScenery();
+
             spriteBatch.DrawString(font, "Player Health: " + playerHealth, new Vector2(0, 0), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
             spriteBatch.DrawString(font, "Score: " + score, new Vector2(0, 20), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
             spriteBatch.Draw(background, new Vector2(0, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
@@ -149,12 +164,21 @@ namespace MonoGameProjekt
             foreach (GameObject gameObject in gameObjects)
             {
                 gameObject.Draw(spriteBatch);
+                gameObject.DrawCollisionBox(spriteBatch, collisionTex);
             }
 
             spriteBatch.End();
             base.Draw(gameTime);
         }
+        private void DrawCollisionBoxes()
+        {
+        }
 
-        
+        private void DrawScenery()
+        {
+            Rectangle screenRectangle = new Rectangle(0, 0, screenWidth, screenHeight);
+            //spriteBatch.Draw(backgroundTexture, screenRectangle, Color.White);
+        }
+
     }
 }
