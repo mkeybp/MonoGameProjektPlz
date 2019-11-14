@@ -61,7 +61,7 @@ namespace MonoGameProjekt
             sprite = sprites[0];
 
             this.origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
-            this.position = new Vector2(GameWorld.ScreenSize.X / 2, GameWorld.ScreenSize.Y - (sprite.Height / 2));
+            this.position = new Vector2(GameWorld.ScreenSize.X / 2, GameWorld.ScreenSize.Y / 2);
 
         }
         /// <summary>

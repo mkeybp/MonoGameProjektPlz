@@ -52,19 +52,19 @@ namespace MonoGameProjekt
         //public Texture2D Sprite { get => sprite; set => sprite = value; }
         //public Color RenderColor { get => rendercolor; set => rendercolor = value; }
 
-        //public Vector2 Position { get => position; set => position = value; }
-        //public Vector2 Middle
-        //{
-        //    get
-        //    {
-        //        Vector2 mid = position;w
-        //        mid.X += Width / 2;
-        //        mid.Y += Height / 2;
-        //        return mid;
-        //    }
-        //}
+        public Vector2 Position { get => position; set => position = value; }
+        public Vector2 Middle
+        {
+            get
+            {
+                Vector2 mid = position;
+                mid.X -= Width / 2;
+                mid.Y -= Height / 2;
+                return mid;
+            }
+        }
 
-        //public int ScaleFactor { get => scaleFactor; set => scaleFactor = value; }
+        public int ScaleFactor { get => scaleFactor; set => scaleFactor = value; }
 
         public GameObject(string spriteName, Vector2 pos)
         {
@@ -113,17 +113,20 @@ namespace MonoGameProjekt
         protected virtual void SetCollisionRects()
         {
             Rectangle cBox = CollisionBox;
-            top = new Rectangle(cBox.X, cBox.Y, cBox.Width * (int)scaleFactor, 1);
-            bottom = new Rectangle(cBox.X, cBox.Y + cBox.Height * (int)scaleFactor, cBox.Width * (int)scaleFactor, 1);
-            right = new Rectangle(cBox.X + cBox.Width * (int)scaleFactor, cBox.Y, 1, cBox.Height * (int)scaleFactor);
-            left = new Rectangle(cBox.X, cBox.Y, 1, cBox.Height * (int)scaleFactor);
+            //top = new Rectangle((int)Middle.X, (int)Middle.Y, cBox.Width * (int)scaleFactor, 1);
+
+
+            top = new Rectangle((int)Middle.X, (int)Middle.Y, cBox.Width * (int)scaleFactor, 1);
+            bottom = new Rectangle((int)Middle.X, (int)Middle.Y + cBox.Height * (int)scaleFactor, cBox.Width * (int)scaleFactor, 1);
+            right = new Rectangle((int)Middle.X + cBox.Width * (int)scaleFactor, (int)Middle.Y, 1, cBox.Height * (int)scaleFactor);
+            left = new Rectangle((int)Middle.X, (int)Middle.Y, 1, cBox.Height * (int)scaleFactor);
         }
 
         public virtual void DrawCollisionBox(SpriteBatch spriteBatch, Texture2D collisionTex)
         {
 
             SetCollisionRects();
-            spriteBatch.Draw(collisionTex, top, null, Color.Black, 0, Vector2.Zero, SpriteEffects.None, 1);
+            spriteBatch.Draw(collisionTex, top, null, Color.Black,0, Vector2.Zero, SpriteEffects.None, 1);
             spriteBatch.Draw(collisionTex, bottom, null, Color.Black, 0, Vector2.Zero, SpriteEffects.None, 1);
             spriteBatch.Draw(collisionTex, right, null, Color.Black, 0, Vector2.Zero, SpriteEffects.None, 1);
             spriteBatch.Draw(collisionTex, left, null, Color.Black, 0, Vector2.Zero, SpriteEffects.None, 1);
