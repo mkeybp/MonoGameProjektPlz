@@ -19,7 +19,6 @@ namespace MonoGameProjekt
         public static List<GameObject> gameObjects;
         public static List<GameObject> newObjects;
 
-        //Texture2D backgroundTexture;
         static Texture2D collisionTex;
         public static Vector2 Camera { get; set; } = new Vector2(0, 0);
         public static Texture2D CollisionTex { get => collisionTex; }

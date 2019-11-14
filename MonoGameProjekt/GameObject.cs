@@ -53,10 +53,12 @@ namespace MonoGameProjekt
         //public Color RenderColor { get => rendercolor; set => rendercolor = value; }
 
         public Vector2 Position { get => position; set => position = value; }
+
         public Vector2 Middle
         {
             get
             {
+
                 Vector2 mid = position;
                 mid.X -= Width / 2;
                 mid.Y -= Height / 2;
@@ -113,8 +115,6 @@ namespace MonoGameProjekt
         protected virtual void SetCollisionRects()
         {
             Rectangle cBox = CollisionBox;
-            //top = new Rectangle((int)Middle.X, (int)Middle.Y, cBox.Width * (int)scaleFactor, 1);
-
 
             top = new Rectangle((int)Middle.X, (int)Middle.Y, cBox.Width * (int)scaleFactor, 1);
             bottom = new Rectangle((int)Middle.X, (int)Middle.Y + cBox.Height * (int)scaleFactor, cBox.Width * (int)scaleFactor, 1);

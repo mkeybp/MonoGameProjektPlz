@@ -18,6 +18,8 @@ namespace Monogame_Projekt
         //Random rnd = new Random();
 
 
+        private int number;
+        private int spawnTimer = 300;
         private Vector2 distance;
         private Vector2 direction;
         public Enemy(string spriteName, Vector2 pos) : base(spriteName, pos)
@@ -25,6 +27,7 @@ namespace Monogame_Projekt
         }
         public override void Update(GameTime gameTime)
         {
+            Spawn();
             Move(gameTime);
         }
 
@@ -35,13 +38,14 @@ namespace Monogame_Projekt
             sprite = sprites[0];
 
             this.origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
-            this.position = new Vector2(GameWorld.ScreenSize.X / 2 + 200, GameWorld.ScreenSize.Y - (sprite.Height / 2));
+            this.position = new Vector2(GameWorld.ScreenSize.X / 2 + 200, GameWorld.ScreenSize.Y / 2);
 
 
             // Random enemy spawn
             //this.position = new Vector2(GameWorld.ScreenSize.X / 2 + rnd.Next(200, 500), GameWorld.ScreenSize.Y - (sprite.Height / 2 + rnd.Next(200, 500)));
+            velocity = new Vector2(rotation);
 
-            Respawn();
+            this.speed = 2f;
         }
 
         private void Move(GameTime gameTime)
@@ -50,8 +54,8 @@ namespace Monogame_Projekt
             distance.X = Player.PlayerPosition.X - position.X;
             distance.Y = Player.PlayerPosition.Y - position.Y;
 
-            rotation = (float)Math.Atan2( distance.X, -distance.Y);
-            
+            rotation = (float)Math.Atan2(distance.X, -distance.Y);
+
             direction = new Vector2((float)Math.Cos(MathHelper.ToRadians(90) - rotation), -(float)Math.Sin(MathHelper.ToRadians(90) - rotation));
 
             float positiveDistanceX = distance.X;
@@ -77,5 +81,15 @@ namespace Monogame_Projekt
             //position = new Vector2(random.Next(0,1000),random.Next(0,1000));
         }
 
+        private void Spawn()
+        {
+            number++;
+            if (number > spawnTimer)
+            {
+                GameWorld.Instanciate(new Enemy("", Vector2.Zero));
+                number = 0;
+            }
+
+        }
     }
 }
