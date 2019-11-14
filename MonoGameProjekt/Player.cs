@@ -26,6 +26,8 @@ namespace MonoGameProjekt
 
         
 
+        
+
         private static Vector2 playerPosition;
         public static Vector2 PlayerPosition
         {
@@ -91,6 +93,10 @@ namespace MonoGameProjekt
         /// </summary>
         private void HandleInput(GameTime gameTime)
         {
+            previousKey = currentKey;
+            currentKey = Keyboard.GetState();
+
+
             if (Keyboard.GetState().IsKeyDown(Keys.A))
                 rotation -= MathHelper.ToRadians(rotationVelocity);
             else if (Keyboard.GetState().IsKeyDown(Keys.D))
@@ -111,7 +117,7 @@ namespace MonoGameProjekt
             }
 
             //Player shoot
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            if (currentKey.IsKeyDown(Keys.Space) && !previousKey.IsKeyDown(Keys.Space))
             {
                 GameWorld.Instanciate(new Bullet());
             }
