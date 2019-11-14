@@ -40,7 +40,7 @@ namespace MonoGameProjekt
         private void Move(GameTime gameTime)
         {
             direction = new Vector2((float)Math.Cos(MathHelper.ToRadians(90) - rotation), -(float)Math.Sin(MathHelper.ToRadians(90) - rotation));
-            position += direction * 3;
+            position += direction * 10;
         }
     }
 }
