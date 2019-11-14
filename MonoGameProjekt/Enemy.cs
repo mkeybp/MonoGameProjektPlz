@@ -68,7 +68,6 @@ namespace Monogame_Projekt
             distance.Y = Player.PlayerPosition.Y - position.Y;
 
             rotation = (float)Math.Atan2(distance.X, -distance.Y);
-
             direction = new Vector2((float)Math.Cos(MathHelper.ToRadians(90) - rotation), -(float)Math.Sin(MathHelper.ToRadians(90) - rotation));
 
             float positiveDistanceX = distance.X;
