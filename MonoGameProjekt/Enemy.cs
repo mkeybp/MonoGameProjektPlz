@@ -17,6 +17,7 @@ namespace Monogame_Projekt
         protected int health;
         //Random rnd = new Random();
 
+        Random randomnew = new Random();
 
         private Vector2 distance;
         private Vector2 direction;

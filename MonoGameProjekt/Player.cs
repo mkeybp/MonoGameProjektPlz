@@ -45,6 +45,7 @@ namespace MonoGameProjekt
             speed = 500f;
 
         }
+
         /// <summary>
         /// Loader spiller sprites.
         /// </summary>
@@ -61,9 +62,9 @@ namespace MonoGameProjekt
             sprite = sprites[0];
 
             this.origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
-            this.position = new Vector2(GameWorld.ScreenSize.X / 2, GameWorld.ScreenSize.Y - (sprite.Height / 2));
-
+            this.position = new Vector2(GameWorld.ScreenSize.X / 2, GameWorld.ScreenSize.Y / 2);
         }
+
         /// <summary>
         /// Tjekker for inputs hver frame.
         /// </summary>
@@ -80,6 +81,7 @@ namespace MonoGameProjekt
             playerPosition = this.position;
             playerRotation = this.rotation;
         }
+
         /// <summary>
         /// Score.
         /// </summary>
@@ -87,6 +89,7 @@ namespace MonoGameProjekt
         {
 
         }
+
         /// <summary>
         /// Bevæger spilleren når man trykker på de givne taster.
         /// </summary>
@@ -120,6 +123,7 @@ namespace MonoGameProjekt
                 GameWorld.Instanciate(new Bullet("", Vector2.Zero));
             }
         }
+
         /// <summary>
         /// Gør at man går samme hastighed ligegyldigt at fps.
         /// </summary>
@@ -130,6 +134,7 @@ namespace MonoGameProjekt
 
             position += ((velocity * speed) * deltaTime);
         }
+
         /// <summary>
         /// Gør at kameraet følger spilleren.
         /// </summary>
