@@ -15,6 +15,7 @@ namespace Monogame_Projekt
     {
         private Random random;
         protected int health;
+        //Random rnd = new Random();
 
 
         private Vector2 distance;
@@ -35,6 +36,10 @@ namespace Monogame_Projekt
 
             this.origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
             this.position = new Vector2(GameWorld.ScreenSize.X / 2 + 200, GameWorld.ScreenSize.Y - (sprite.Height / 2));
+
+
+            // Random enemy spawn
+            //this.position = new Vector2(GameWorld.ScreenSize.X / 2 + rnd.Next(200, 500), GameWorld.ScreenSize.Y - (sprite.Height / 2 + rnd.Next(200, 500)));
 
             Respawn();
         }

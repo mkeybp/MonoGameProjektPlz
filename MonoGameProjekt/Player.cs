@@ -43,6 +43,11 @@ namespace MonoGameProjekt
         public Player(string spriteName, Vector2 pos) : base(spriteName, pos)
         {
             speed = 500f;
+
+            if (true)
+            {
+
+            }
         }
         /// <summary>
         /// Loader spiller sprites.

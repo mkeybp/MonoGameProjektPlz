@@ -49,22 +49,22 @@ namespace MonoGameProjekt
 
 
 
-        public Texture2D Sprite { get => sprite; set => sprite = value; }
-        public Color RenderColor { get => rendercolor; set => rendercolor = value; }
+        //public Texture2D Sprite { get => sprite; set => sprite = value; }
+        //public Color RenderColor { get => rendercolor; set => rendercolor = value; }
 
-        public Vector2 Position { get => position; set => position = value; }
-        public Vector2 Middle
-        {
-            get
-            {
-                Vector2 mid = position;
-                mid.X += Width / 2;
-                mid.Y += Height / 2;
-                return mid;
-            }
-        }
+        //public Vector2 Position { get => position; set => position = value; }
+        //public Vector2 Middle
+        //{
+        //    get
+        //    {
+        //        Vector2 mid = position;w
+        //        mid.X += Width / 2;
+        //        mid.Y += Height / 2;
+        //        return mid;
+        //    }
+        //}
 
-        public int ScaleFactor { get => scaleFactor; set => scaleFactor = value; }
+        //public int ScaleFactor { get => scaleFactor; set => scaleFactor = value; }
 
         public GameObject(string spriteName, Vector2 pos)
         {
@@ -74,7 +74,7 @@ namespace MonoGameProjekt
         {
             get
             {
-                return new Rectangle((int)position.X, (int)position.Y, sprite.Width * (int)scaleFactor, sprite.Height * (int)scaleFactor);
+                return new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height);
             }
         }
 
