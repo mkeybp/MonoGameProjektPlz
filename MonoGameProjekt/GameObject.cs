@@ -46,6 +46,9 @@ namespace MonoGameProjekt
         protected KeyboardState currentKey;
 
         protected KeyboardState previousKey;
+        public abstract void LoadContent(ContentManager content);
+
+        public abstract void Update(GameTime gameTime);
 
 
 
@@ -100,9 +103,6 @@ namespace MonoGameProjekt
         public virtual void DoCollision(GameObject otherObj)
         {
         }
-        public abstract void LoadContent(ContentManager content);
-
-        public abstract void Update(GameTime gameTime);
 
         public void Draw(SpriteBatch spriteBatch)
         {
@@ -122,13 +122,11 @@ namespace MonoGameProjekt
 
         public virtual void DrawCollisionBox(SpriteBatch spriteBatch, Texture2D collisionTex)
         {
-
             SetCollisionRects();
-            spriteBatch.Draw(collisionTex, top, null, Color.Black);
-            spriteBatch.Draw(collisionTex, bottom, null, Color.Black);
-            spriteBatch.Draw(collisionTex, right, null, Color.Black);
-            spriteBatch.Draw(collisionTex, left, null, Color.Black);
-
+            spriteBatch.Draw(collisionTex, top, null, Color.Black, 0, Vector2.Zero,SpriteEffects.None, 1);
+            spriteBatch.Draw(collisionTex, bottom, null, Color.Black, 0, Vector2.Zero, SpriteEffects.None, 1);
+            spriteBatch.Draw(collisionTex, right, null, Color.Black, 0, Vector2.Zero, SpriteEffects.None, 1);
+            spriteBatch.Draw(collisionTex, left, null, Color.Black, 0, Vector2.Zero, SpriteEffects.None, 1);
         }
 
 
@@ -143,7 +141,6 @@ namespace MonoGameProjekt
                 timeElapsed = 0;
                 currentIndex = 0;
             }
-
         }
 
     }
