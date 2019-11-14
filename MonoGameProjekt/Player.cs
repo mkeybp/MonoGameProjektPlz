@@ -100,7 +100,7 @@ namespace MonoGameProjekt
             if (Keyboard.GetState().IsKeyDown(Keys.W))
                 position += direction * linearVelocity;
             if (Keyboard.GetState().IsKeyDown(Keys.S))
-                position -= direction * linearVelocity;
+                position -= direction * linearVelocity / 2;
             //Handle Animation
             if (Keyboard.GetState().IsKeyDown(Keys.W) || Keyboard.GetState().IsKeyDown(Keys.S))
             {
