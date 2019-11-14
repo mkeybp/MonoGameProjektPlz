@@ -12,10 +12,7 @@ using Monogame_Projekt;
 namespace MonoGameProjekt
 {
     class Player : GameObject
-    {
-        //protected List<int> weapons = new List<int>;
-
-        
+    {        
         private Vector2 direction;
         public float rotationVelocity = 3f;
         public float linearVelocity = 4f;
@@ -23,7 +20,6 @@ namespace MonoGameProjekt
         public int playerHealth;
         public int score;
         public float speed;
-
         
 
         private static Vector2 playerPosition;
