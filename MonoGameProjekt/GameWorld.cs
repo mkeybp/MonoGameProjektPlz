@@ -15,11 +15,11 @@ namespace MonoGameProjekt
 
         int screenWidth;
         int screenHeight;
-
+        // Creates list's of GameObject
         public static List<GameObject> gameObjects;
         public static List<GameObject> newObjects;
 
-        static Texture2D collisionTex;
+        public static Texture2D collisionTex;
         public static Vector2 Camera { get; set; } = new Vector2(0, 0);
         public static Texture2D CollisionTex { get => collisionTex; }
 
@@ -32,8 +32,10 @@ namespace MonoGameProjekt
 
 
         public SpriteFont font;
-        protected int score = 8;
-        public int playerHealth = 76;
+        // Killed enemies
+        protected int score = 0;
+        // Players health
+        public int playerHealth = 100;
         private Texture2D background;
 
 
@@ -73,10 +75,11 @@ namespace MonoGameProjekt
             screenSize.Y = 1000;
             graphics.IsFullScreen = false;
             graphics.ApplyChanges();
-            Window.Title = "MonogameProject";
-
+            Window.Title = "Emagonom";
+            // Creates an instance of GameObject and newObjects
             gameObjects = new List<GameObject>();
             newObjects = new List<GameObject>();
+            // Add's Player, Enemy and Bullet to the gameObjects List
             gameObjects.Add(new Player("", Vector2.Zero));
             gameObjects.Add(new Enemy("", Vector2.Zero));
             gameObjects.Add(new Bullet("", Vector2.Zero));
@@ -92,23 +95,19 @@ namespace MonoGameProjekt
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             device = graphics.GraphicsDevice;
-
+            // Loads text/fonts
             font = Content.Load<SpriteFont>("PlayerHealth");
             font = Content.Load<SpriteFont>("Score");
+            // Loads background
             background = Content.Load<Texture2D>("grass_backgroundnew");
-
-            // Mikkel Bakground
-            //backgroundTexture = Content.Load<Texture2D>("grass");
             collisionTex = Content.Load<Texture2D>("CollisionTex");
             screenWidth = device.PresentationParameters.BackBufferWidth;
             screenHeight = device.PresentationParameters.BackBufferHeight;
-
+            // Loops through gameObjects
             foreach (GameObject go in gameObjects)
             {
                 go.LoadContent(Content);
             }
-
-            // TODO: use this.Content to load your game content here
         }
 
         /// <summary>
@@ -138,9 +137,6 @@ namespace MonoGameProjekt
             newObjects.Clear();
 
             base.Update(gameTime);
-
-
-
         }
 
         /// <summary>
@@ -150,21 +146,21 @@ namespace MonoGameProjekt
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            // TODO: Add your drawing code here
+            // Allows us to use layerDept (values closer to 0 are drawn first)
             spriteBatch.Begin(SpriteSortMode.FrontToBack);
-            // Collision boxes
-            DrawScenery();
-
+            //DrawScenery();
+            // Drawing the text on the screen
             spriteBatch.DrawString(font, "Player Health: " + playerHealth, new Vector2(0, 0), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
             spriteBatch.DrawString(font, "Monsters Killed: " + score, new Vector2(0, 22), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+            // Draws the background
             spriteBatch.Draw(background, new Vector2(0, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
 
-
+            // Loop's through the game objects
             foreach (GameObject gameObject in gameObjects)
             {
+                // Draws all the sprites 
                 gameObject.Draw(spriteBatch);
-
+                // Only show collision boxes in debug mode
 #if DEBUG
                 gameObject.DrawCollisionBox(spriteBatch, collisionTex);
 #endif
@@ -173,13 +169,11 @@ namespace MonoGameProjekt
             spriteBatch.End();
             base.Draw(gameTime);
         }
- 
-
-        private void DrawScenery()
-        {
-            Rectangle screenRectangle = new Rectangle(0, 0, screenWidth, screenHeight);
-            //spriteBatch.Draw(backgroundTexture, screenRectangle, Color.White);
-        }
+        //private void DrawScenery()
+        //{
+        //    Rectangle screenRectangle = new Rectangle(0, 0, screenWidth, screenHeight);
+        //    //spriteBatch.Draw(backgroundTexture, screenRectangle, Color.White);
+        //}
 
     }
 }

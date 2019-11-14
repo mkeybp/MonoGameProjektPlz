@@ -13,42 +13,57 @@ namespace Monogame_Projekt
 {
     class Enemy : GameObject
     {
-        private Random random;
-        protected int health;
-        //Random rnd = new Random();
-
-
-        private int number;
+        // For enemy health
+        protected int enemyHealth;
+        // Count's the number of enemies (for adding more enemies)
+        private int enemyCounter;
+        // Timer for spawning of a new enemy
         private int spawnTimer = 300;
+        // Distance
         private Vector2 distance;
+        // Direction of the enemy
         private Vector2 direction;
         public Enemy(string spriteName, Vector2 pos) : base(spriteName, pos)
         {
         }
+        /// <summary>
+        /// Updates the Spawn and Move classes
+        /// </summary>
+        /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
             Spawn();
             Move(gameTime);
         }
-
+        /// <summary>
+        /// Loads the content
+        /// </summary>
+        /// <param name="content"></param>
         public override void LoadContent(ContentManager content)
         {
+            // Load's enemy's sprite
             sprite = content.Load<Texture2D>("enemy1");
-
+            // The center of the enemy
             this.origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
+            // Spawn position of all enemies
             this.position = new Vector2(0, 0);
 
 
             // Random enemy spawn
             //this.position = new Vector2(GameWorld.ScreenSize.X / 2 + rnd.Next(200, 500), GameWorld.ScreenSize.Y - (sprite.Height / 2 + rnd.Next(200, 500)));
-            velocity = new Vector2(rotation);
 
+            // The speed of the rotation
+            velocity = new Vector2(rotation);
+            // the speed of the enemy
             this.speed = 2f;
         }
-
+        /// <summary>
+        /// Method for enemy movement
+        /// </summary>
+        /// <param name="gameTime"></param>
         private void Move(GameTime gameTime)
         {
-
+            // Calculates the distance from the player and the enemy
             distance.X = Player.PlayerPosition.X - position.X;
             distance.Y = Player.PlayerPosition.Y - position.Y;
 
@@ -71,15 +86,16 @@ namespace Monogame_Projekt
 
 
         }
-
+        /// <summary>
+        /// Method for spawning enemies
+        /// </summary>
         private void Spawn()
         {
-            number++;
-            if (number > spawnTimer)
+            enemyCounter++;
+            if (enemyCounter > spawnTimer)
             {
-                  //this.position = new Vector2(GameWorld.ScreenSize.X / 2 + rnd.Next(200, 500), GameWorld.ScreenSize.Y - (sprite.Height / 2 + rnd.Next(200, 500)));
                 GameWorld.Instanciate(new Enemy("", Vector2.Zero));
-                number = 0;
+                enemyCounter = 0;
             }
 
         }

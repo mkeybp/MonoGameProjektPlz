@@ -11,25 +11,33 @@ using Monogame_Projekt;
 
 namespace MonoGameProjekt
 {
+    /// <summary>
+    /// Player inherits from GameObject
+    /// </summary>
     class Player : GameObject
     {
+        // Direction of the player
         private Vector2 direction;
+        // Rotation spped
         public float rotationVelocity = 3f;
+        // Speed of movemenet
         public float linearVelocity = 4f;
-
+        // Score to be
         public int score;
+        // The speed of the player
         public float speed;
 
-
-
+        // Player's current position
         private static Vector2 playerPosition;
         public static Vector2 PlayerPosition
         {
             get { return playerPosition; }
             set { playerPosition = value; }
         }
-
+        // Player's current rotation
         private static float playerRotation;
+        private Texture2D defaultSprite;
+
         public static float PlayerRotation
         {
             get { return playerRotation; }
@@ -41,26 +49,29 @@ namespace MonoGameProjekt
             speed = 500f;
         }
         /// <summary>
-        /// Loader spiller sprites.
+        /// Load's all player sprites
         /// </summary>
         /// <param name="content"></param>
         public override void LoadContent(ContentManager content)
         {
             sprites = new Texture2D[5];
-
+            // Loop's through the sprite array to create an animation
             for (int i = 0; i < sprites.Length; i++)
             {
                 sprites[i] = content.Load<Texture2D>(i + 1 + "playernew");
             }
-            fps = 5;
-            sprite = sprites[0];
 
+            fps = 5;
+            // Default sprite (for standing still)
+            sprite = sprites[0];
+            // The center of the player
             this.origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
+            // The start position of the player
             this.position = new Vector2(GameWorld.ScreenSize.X / 2, GameWorld.ScreenSize.Y / 2);
 
         }
         /// <summary>
-        /// Tjekker for inputs hver frame.
+        /// Check's for input every frame
         /// </summary>
         /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
@@ -74,17 +85,16 @@ namespace MonoGameProjekt
             CameraFollow();
             playerPosition = this.position;
             playerRotation = this.rotation;
-
         }
         /// <summary>
-        /// Score.
+        /// Score to be
         /// </summary>
         private void HandleScore()
         {
 
         }
         /// <summary>
-        /// Bevæger spilleren når man trykker på de givne taster.
+        /// Handles key input from player for movement, animation and shooting
         /// </summary>
         private void HandleInput(GameTime gameTime)
         {
@@ -100,24 +110,25 @@ namespace MonoGameProjekt
                 position += direction * linearVelocity;
             if (Keyboard.GetState().IsKeyDown(Keys.S))
                 position -= direction * linearVelocity;
-            //Handle Animation
+            // Only animates when W and S (forward an backward) are pressed
             if (Keyboard.GetState().IsKeyDown(Keys.W) || Keyboard.GetState().IsKeyDown(Keys.S))
             {
                 Animate(gameTime);
             }
+            // If neither W or S are pressed, use defalut sprite (standing still)
             else if (!Keyboard.GetState().IsKeyDown(Keys.W) || !Keyboard.GetState().IsKeyDown(Keys.S))
             {
                 sprite = sprites[0];
             }
 
-            //Player shoot
+            // Player shoot 
             if (currentKey.IsKeyDown(Keys.Space) && !previousKey.IsKeyDown(Keys.Space))
             {
                 GameWorld.Instanciate(new Bullet("", Vector2.Zero));
             }
         }
         /// <summary>
-        /// Gør at man går samme hastighed ligegyldigt at fps.
+        /// Makes movement same speed no matter how many frames you've got
         /// </summary>
         /// <param name="gameTime"></param>
         protected void Move(GameTime gameTime)
@@ -127,14 +138,14 @@ namespace MonoGameProjekt
             position += ((velocity * speed) * deltaTime);
         }
         /// <summary>
-        /// Gør at kameraet følger spilleren.
+        /// Camera follow's the player (player is centered)
         /// </summary>
         private void CameraFollow()
         {
 
         }
         /// <summary>
-        /// Lader dig skifte våben
+        /// Weapon selection
         /// </summary>
         private void SelectWeapon()
         {
@@ -142,7 +153,7 @@ namespace MonoGameProjekt
 
         }
         /// <summary>
-        /// Lader dig gå ud fra siden af mappet og komme ind på den anden side.
+        /// Makes it possible to move out of the map and enter on det opposite side
         /// </summary>
         private void ScreenWarp()
         {
