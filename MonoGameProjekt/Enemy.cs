@@ -33,12 +33,10 @@ namespace Monogame_Projekt
 
         public override void LoadContent(ContentManager content)
         {
-            sprites = new Texture2D[] {
-                content.Load<Texture2D>("enemy1") };
-            sprite = sprites[0];
+            sprite = content.Load<Texture2D>("enemy1");
 
             this.origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
-            this.position = new Vector2(GameWorld.ScreenSize.X / 2 + 200, GameWorld.ScreenSize.Y / 2);
+            this.position = new Vector2(0, 0);
 
 
             // Random enemy spawn
@@ -61,7 +59,10 @@ namespace Monogame_Projekt
             float positiveDistanceX = distance.X;
             float positiveDistanceY = distance.Y;
             if (distance.X < 0)
+            {
                 positiveDistanceX *= -1;
+
+            }
             if (distance.Y < 0)
                 positiveDistanceY *= -1;
 
@@ -71,21 +72,12 @@ namespace Monogame_Projekt
 
         }
 
-
-
-        private void Respawn()
-        {
-            velocity = new Vector2(rotation);
-
-            this.speed = 2f;
-            //position = new Vector2(random.Next(0,1000),random.Next(0,1000));
-        }
-
         private void Spawn()
         {
             number++;
             if (number > spawnTimer)
             {
+                  //this.position = new Vector2(GameWorld.ScreenSize.X / 2 + rnd.Next(200, 500), GameWorld.ScreenSize.Y - (sprite.Height / 2 + rnd.Next(200, 500)));
                 GameWorld.Instanciate(new Enemy("", Vector2.Zero));
                 number = 0;
             }

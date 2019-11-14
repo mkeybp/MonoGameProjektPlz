@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Monogame_Projekt;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,7 +41,7 @@ namespace MonoGameProjekt
         private int currentIndex;
 
         protected int fps;
-        
+
         protected int collisionOffset = 0;
 
         protected KeyboardState currentKey;
@@ -87,6 +88,7 @@ namespace MonoGameProjekt
                 return CollisionBox.Width;
             }
         }
+
         public virtual int Height
         {
             get
@@ -94,6 +96,7 @@ namespace MonoGameProjekt
                 return CollisionBox.Height;
             }
         }
+
         public bool IsColliding(GameObject otherObj)
         {
             return CollisionBox.Intersects(otherObj.CollisionBox);
@@ -126,7 +129,7 @@ namespace MonoGameProjekt
         {
 
             SetCollisionRects();
-            spriteBatch.Draw(collisionTex, top, null, Color.Black,0, Vector2.Zero, SpriteEffects.None, 1);
+            spriteBatch.Draw(collisionTex, top, null, Color.Black, 0, Vector2.Zero, SpriteEffects.None, 1);
             spriteBatch.Draw(collisionTex, bottom, null, Color.Black, 0, Vector2.Zero, SpriteEffects.None, 1);
             spriteBatch.Draw(collisionTex, right, null, Color.Black, 0, Vector2.Zero, SpriteEffects.None, 1);
             spriteBatch.Draw(collisionTex, left, null, Color.Black, 0, Vector2.Zero, SpriteEffects.None, 1);
@@ -139,8 +142,8 @@ namespace MonoGameProjekt
             timeElapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
             currentIndex = (int)(timeElapsed * fps);
             sprite = sprites[currentIndex];
-            
-            if(currentIndex >= sprites.Length - 1)
+
+            if (currentIndex >= sprites.Length - 1)
             {
                 timeElapsed = 0;
                 currentIndex = 0;

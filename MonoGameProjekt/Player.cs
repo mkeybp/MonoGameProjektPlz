@@ -13,14 +13,10 @@ namespace MonoGameProjekt
 {
     class Player : GameObject
     {
-        //protected List<int> weapons = new List<int>;
-
-
         private Vector2 direction;
         public float rotationVelocity = 3f;
         public float linearVelocity = 4f;
 
-        public int playerHealth;
         public int score;
         public float speed;
 
@@ -43,7 +39,6 @@ namespace MonoGameProjekt
         public Player(string spriteName, Vector2 pos) : base(spriteName, pos)
         {
             speed = 500f;
-
         }
         /// <summary>
         /// Loader spiller sprites.
@@ -79,6 +74,7 @@ namespace MonoGameProjekt
             CameraFollow();
             playerPosition = this.position;
             playerRotation = this.rotation;
+
         }
         /// <summary>
         /// Score.

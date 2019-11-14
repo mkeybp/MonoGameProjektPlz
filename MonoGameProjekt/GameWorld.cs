@@ -32,8 +32,8 @@ namespace MonoGameProjekt
 
 
         public SpriteFont font;
-        protected int score = 0;
-        protected int playerHealth = 100;
+        protected int score = 8;
+        public int playerHealth = 76;
         private Texture2D background;
 
 
@@ -139,7 +139,7 @@ namespace MonoGameProjekt
 
             base.Update(gameTime);
 
-            
+
 
         }
 
@@ -164,15 +164,16 @@ namespace MonoGameProjekt
             foreach (GameObject gameObject in gameObjects)
             {
                 gameObject.Draw(spriteBatch);
+
+#if DEBUG
                 gameObject.DrawCollisionBox(spriteBatch, collisionTex);
+#endif
             }
 
             spriteBatch.End();
             base.Draw(gameTime);
         }
-        private void DrawCollisionBoxes()
-        {
-        }
+ 
 
         private void DrawScenery()
         {
