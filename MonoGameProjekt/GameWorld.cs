@@ -157,7 +157,7 @@ namespace MonoGameProjekt
 
             spriteBatch.DrawString(font, "Player Health: " + playerHealth, new Vector2(0, 0), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
             spriteBatch.DrawString(font, "Monsters Killed: " + score, new Vector2(0, 22), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
-            spriteBatch.Draw(background, new Vector2(0, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+            //spriteBatch.Draw(background, new Vector2(0, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
 
 
             foreach (GameObject gameObject in gameObjects)
