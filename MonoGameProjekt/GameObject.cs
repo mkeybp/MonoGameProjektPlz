@@ -117,17 +117,16 @@ namespace MonoGameProjekt
             bottom = new Rectangle(cBox.X, cBox.Y + cBox.Height * (int)scaleFactor, cBox.Width * (int)scaleFactor, 1);
             right = new Rectangle(cBox.X + cBox.Width * (int)scaleFactor, cBox.Y, 1, cBox.Height * (int)scaleFactor);
             left = new Rectangle(cBox.X, cBox.Y, 1, cBox.Height * (int)scaleFactor);
-
         }
 
         public virtual void DrawCollisionBox(SpriteBatch spriteBatch, Texture2D collisionTex)
         {
 
             SetCollisionRects();
-            spriteBatch.Draw(collisionTex, top, null, Color.Black);
-            spriteBatch.Draw(collisionTex, bottom, null, Color.Black);
-            spriteBatch.Draw(collisionTex, right, null, Color.Black);
-            spriteBatch.Draw(collisionTex, left, null, Color.Black);
+            spriteBatch.Draw(collisionTex, top, null, Color.Black, 0, Vector2.Zero, SpriteEffects.None, 1);
+            spriteBatch.Draw(collisionTex, bottom, null, Color.Black, 0, Vector2.Zero, SpriteEffects.None, 1);
+            spriteBatch.Draw(collisionTex, right, null, Color.Black, 0, Vector2.Zero, SpriteEffects.None, 1);
+            spriteBatch.Draw(collisionTex, left, null, Color.Black, 0, Vector2.Zero, SpriteEffects.None, 1);
 
         }
 
