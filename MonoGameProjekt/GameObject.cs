@@ -108,7 +108,7 @@ namespace MonoGameProjekt
         {
             spriteBatch.Draw(sprite, position, null, Color.White, rotation, origin, 1, SpriteEffects.None, 1);
 
-            spriteBatch.Draw(sprite, position - GameWorld.Camera, sprite.Bounds, rendercolor, 0f, new Vector2(0, 0), new Vector2(scaleFactor, scaleFactor), SpriteEffects.None, 0f);
+            //spriteBatch.Draw(sprite, position - GameWorld.Camera, sprite.Bounds, rendercolor, 0f, new Vector2(0, 0), new Vector2(scaleFactor, scaleFactor), SpriteEffects.None, 0f);
         }
         protected virtual void SetCollisionRects()
         {
