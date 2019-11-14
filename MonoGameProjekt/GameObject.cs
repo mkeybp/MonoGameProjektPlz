@@ -74,7 +74,7 @@ namespace MonoGameProjekt
         {
             get
             {
-                return new Rectangle((int)position.X, (int)position.Y, sprite.Width * (int)scaleFactor, sprite.Height * (int)scaleFactor);
+               return new Rectangle((int)position.X, (int)position.Y, sprite.Width * (int)scaleFactor, sprite.Height * (int)scaleFactor);
             }
         }
 

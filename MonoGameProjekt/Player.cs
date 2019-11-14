@@ -74,8 +74,6 @@ namespace MonoGameProjekt
             HandleScore();
             ScreenWarp();
 
-            SelectWeapon();
-            CameraFollow();
             playerPosition = this.position;
             playerRotation = this.rotation;
         }
@@ -128,21 +126,6 @@ namespace MonoGameProjekt
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             position += ((velocity * speed) * deltaTime);
-        }
-        /// <summary>
-        /// Gør at kameraet følger spilleren.
-        /// </summary>
-        private void CameraFollow()
-        {
-
-        }
-        /// <summary>
-        /// Lader dig skifte våben
-        /// </summary>
-        private void SelectWeapon()
-        {
-
-
         }
         /// <summary>
         /// Lader dig gå ud fra siden af mappet og komme ind på den anden side.

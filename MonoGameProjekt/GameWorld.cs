@@ -154,7 +154,6 @@ namespace MonoGameProjekt
             // TODO: Add your drawing code here
             spriteBatch.Begin(SpriteSortMode.FrontToBack);
             // Collision boxes
-            DrawScenery();
 
             spriteBatch.DrawString(font, "Player Health: " + playerHealth, new Vector2(0, 0), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
             spriteBatch.DrawString(font, "Monsters Killed: " + score, new Vector2(0, 22), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
@@ -173,12 +172,5 @@ namespace MonoGameProjekt
         private void DrawCollisionBoxes()
         {
         }
-
-        private void DrawScenery()
-        {
-            Rectangle screenRectangle = new Rectangle(0, 0, screenWidth, screenHeight);
-            //spriteBatch.Draw(backgroundTexture, screenRectangle, Color.White);
-        }
-
     }
 }
