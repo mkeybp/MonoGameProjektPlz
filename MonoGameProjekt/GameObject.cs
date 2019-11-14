@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,6 +42,11 @@ namespace MonoGameProjekt
         protected int fps;
         
         protected int collisionOffset = 0;
+
+        protected KeyboardState currentKey;
+
+        protected KeyboardState previousKey;
+
 
 
         public Texture2D Sprite { get => sprite; set => sprite = value; }

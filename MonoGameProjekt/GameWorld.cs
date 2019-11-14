@@ -33,7 +33,7 @@ namespace MonoGameProjekt
 
         public SpriteFont font;
         protected int score = 0;
-        protected int playerHealth = 0;
+        protected int playerHealth = 100;
         private Texture2D background;
 
 
@@ -157,7 +157,7 @@ namespace MonoGameProjekt
             DrawScenery();
 
             spriteBatch.DrawString(font, "Player Health: " + playerHealth, new Vector2(0, 0), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
-            spriteBatch.DrawString(font, "Score: " + score, new Vector2(0, 20), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+            spriteBatch.DrawString(font, "Monsters Killed: " + score, new Vector2(0, 22), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
             spriteBatch.Draw(background, new Vector2(0, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
 
 
